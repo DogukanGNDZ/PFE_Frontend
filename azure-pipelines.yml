@@ -15,14 +15,12 @@ steps:
       versionSpec: "18.x"
     displayName: "Install Node.js"
 
-  - task: CopyFiles@2
+  - task: ArchiveFiles@2
     inputs:
-      targetFolder: "$(Build.ArtifactStagingDirectory)"
+      rootFolderOrFile: "$(system.defaultWorkingDirectory)"
+      includeRootFolder: false
 
   - task: PublishBuildArtifacts@1
-    displayName: "Publish Artifact: drop"
-    inputs:
-      PathtoPublish: "$(build.artifactstagingdirectory)"
 
   - script: |
       npm install
