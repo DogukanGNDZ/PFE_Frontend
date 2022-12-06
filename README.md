@@ -1,4 +1,4 @@
-# pfe_front
+# pfe-front
 
 ## Project setup
 ```
