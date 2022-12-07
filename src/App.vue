@@ -1,21 +1,19 @@
 <template>
   <v-app>
-    <v-main>
-      <HomeView />
-    </v-main>
+    <v-main><RegisterView /></v-main>
   </v-app>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 //import NavBar from "@/components/Navbar.vue";
-import HomeView from "./views/HomeView.vue";
+import RegisterView from "./views/RegisterView.vue";
 
 export default {
   name: "App",
 
   components: {
-    HomeView,
+    RegisterView,
   },
 
   data: () => ({

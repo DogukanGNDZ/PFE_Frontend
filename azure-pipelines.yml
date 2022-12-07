@@ -15,6 +15,13 @@ steps:
       versionSpec: "18.x"
     displayName: "Install Node.js"
 
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: "$(system.defaultWorkingDirectory)"
+      includeRootFolder: false
+
+  - task: PublishBuildArtifacts@1
+
   - script: |
       npm install
       npm run build
