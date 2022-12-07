@@ -8,6 +8,7 @@
     <v-btn class="text-white" to="/about">About</v-btn>
     <v-btn class="text-white" to="/teams">Teams</v-btn>
     <v-btn class="text-white" to="/contact">Contact</v-btn>
+    <v-btn class="text-white" to="/register">Register</v-btn>
   </v-app-bar>
   <router-view />
 </template>

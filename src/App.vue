@@ -1,19 +1,17 @@
 <template>
   <v-app>
-    <v-main><RegisterView /></v-main>
+    <v-main><NavBar /></v-main>
   </v-app>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
-//import NavBar from "@/components/Navbar.vue";
-import RegisterView from "./views/RegisterView.vue";
+import NavBar from "@/components/Navbar.vue";
 
 export default {
   name: "App",
 
   components: {
-    RegisterView,
+    NavBar,
   },
 
   data: () => ({

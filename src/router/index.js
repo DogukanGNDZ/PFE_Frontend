@@ -3,6 +3,7 @@ import Home from "@/views/HomeView.vue";
 import About from "@/views/AboutView.vue";
 import Contact from "@/views/ContactView.vue";
 import Teams from "@/views/TeamsView.vue";
+import Register from "@/views/RegisterView.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/teams",
     name: "Teams",
     component: Teams,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
 ];
 
