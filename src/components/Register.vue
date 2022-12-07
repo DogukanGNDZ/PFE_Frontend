@@ -46,10 +46,9 @@
     </v-card-text>
     </v-card-title>
     </v-card>
-    </v-container>
-  
+  </v-container>
 </template>
-  
+
 <script>
 import axios from 'axios';
 import { server } from '../helper';
@@ -93,8 +92,8 @@ import User from '../models/user.js';
   }
 </script>
 <style>
-  .register-page {
-    width: 400px;
-    margin: auto;
-  }
+.register-page {
+  width: 400px;
+  margin: auto;
+}
 </style>

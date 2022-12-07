@@ -1,9 +1,8 @@
-<!-- Template -->
 <template>
   <v-app>
     <v-container>
       <div>
-        <h1 text class="text-red mt-10">Home</h1>
+        <h1 text class="text-red mt-10">About Page</h1>
       </div>
     </v-container>
   </v-app>
@@ -11,6 +10,6 @@
 
 <script>
 export default {
-  name: "HomeView",
+  name: "About",
 };
 </script>
