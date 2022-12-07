@@ -4,6 +4,7 @@ import About from "@/views/AboutView.vue";
 import Contact from "@/views/ContactView.vue";
 import Teams from "@/views/TeamsView.vue";
 import Register from "@/views/RegisterView.vue";
+import Role from "@/views/ChoseRoleView.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/role",
+    name: "Role",
+    component: Role,
   },
 ];
 

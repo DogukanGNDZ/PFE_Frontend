@@ -3,20 +3,20 @@
     <v-container class="register-page">
         <v-card :loading="loading">
             <v-card-title>
-                Inscription
+                Register
             <v-card-text>
       <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading">
         <v-text-field
           v-model="user.name"
           :counter="10"
           :rules="nameRules"
-          label="Nom"
+          label="Lastname"
         ></v-text-field>
         <v-text-field
           v-model="user.firstname"
           :counter="10"
           :rules="firstNameRules"
-          label="Prénom"
+          label="Firstname"
         ></v-text-field>
         <v-text-field
           type="number"
@@ -35,7 +35,7 @@
           :type="show ? 'text' : 'password'"
           :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
           @click:append="() => (show = !show)"
-          label="Mot de passe"
+          label="Password"
           hint="At least 8 characters"
         ></v-text-field>
         <v-btn type="submit" :disabled="!valid">
@@ -51,7 +51,7 @@
 
 <script>
 import axios from 'axios';
-import { server } from '../helper';
+//import { server } from '../helper';
 import User from '../models/user.js';
   export default {
     name: "Register",
@@ -82,11 +82,8 @@ import User from '../models/user.js';
     }),
     methods: {
         handleRegister() {
-            axios.post('http://localhost:3000/user/register', this.user)
-            this.$refs.form.validate();
-            if (!this.valid) return;
-  
-        // submit the form
+            axios.post('http://localhost:5000/users/register',{firstname: this.user.firstname, lastname: this.user.lastname, age: this.user.age, email: this.user.email, password: this.user.password})
+            .catch(e=>{console.log(e);this.error=e})
       }
     }
   }
