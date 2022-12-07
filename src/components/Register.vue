@@ -5,32 +5,32 @@
             <v-card-title>
                 Inscription
             <v-card-text>
-      <v-form ref="form" v-model="valid" :loading="loading">
+      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading">
         <v-text-field
-          v-model="name"
+          v-model="user.name"
           :counter="10"
           :rules="nameRules"
           label="Nom"
         ></v-text-field>
         <v-text-field
-          v-model="firstName"
+          v-model="user.firstname"
           :counter="10"
           :rules="firstNameRules"
           label="Prénom"
         ></v-text-field>
         <v-text-field
           type="number"
-          v-model="age"
+          v-model="user.age"
           :rules="ageRules"
           label="Age"
         ></v-text-field>
         <v-text-field
-          v-model="email"
+          v-model="user.email"
           :rules="emailRules"
           label="E-mail"
         ></v-text-field>
         <v-text-field
-          v-model="password"
+          v-model="user.password"
           :rules="passwordRules"
           :type="show ? 'text' : 'password'"
           :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
@@ -38,7 +38,7 @@
           label="Mot de passe"
           hint="At least 8 characters"
         ></v-text-field>
-        <v-btn @click="register" :disabled="!valid">
+        <v-btn type="submit" :disabled="!valid">
           S'enregistrer
         </v-btn>
       </v-form>
@@ -51,15 +51,14 @@
 </template>
   
 <script>
+import axios from 'axios';
+import { server } from '../helper';
+import User from '../models/user.js';
   export default {
     name: "Register",
     data: () => ({
       valid: false,
-      name: '',
-      firstName: '',
-      age: '',
-      email: '',
-      password: '',
+      user : new User('','',0,'',''),
       show: false,
       nameRules: [
         v => !!v || 'Le nom est requis',
@@ -83,9 +82,10 @@
       ]
     }),
     methods: {
-      register() {
-        this.$refs.form.validate();
-        if (!this.valid) return;
+        handleRegister() {
+            axios.post('http://localhost:3000/user/register', this.user)
+            this.$refs.form.validate();
+            if (!this.valid) return;
   
         // submit the form
       }
