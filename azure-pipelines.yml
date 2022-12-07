@@ -17,7 +17,7 @@ steps:
 
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: "$(system.defaultWorkingDirectory)"
+      rootFolderOrFile: "$(system.defaultWorkingDirectory)/dist/"
       includeRootFolder: false
 
   - task: PublishBuildArtifacts@1
