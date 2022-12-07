@@ -1,14 +1,15 @@
 <template>
   <v-app-bar app color="black" dark flat class="px-12">
-    <v-btn>
+    <v-btn to="/">
       <v-icon color="red" left class="mr-2">fas fa-signature</v-icon> Recruit
     </v-btn>
     <v-spacer></v-spacer>
-    <v-btn text class="text-red">Home</v-btn>
-    <v-btn text>About</v-btn>
-    <v-btn text>Teams</v-btn>
-    <v-btn text>Contact</v-btn>
+    <v-btn class="text-white" to="/">Home</v-btn>
+    <v-btn class="text-white" to="/about">About</v-btn>
+    <v-btn class="text-white" to="/teams">Teams</v-btn>
+    <v-btn class="text-white" to="/contact">Contact</v-btn>
   </v-app-bar>
+  <router-view />
 </template>
 
 <script>

@@ -1,22 +1,20 @@
-<!-- Template -->
 <template>
   <v-app>
     <NavBar />
 
     <v-container>
       <div>
-        <h1 text class="text-red mt-10">Home Page</h1>
+        <h1 text class="text-red mt-10">Teams Page</h1>
       </div>
     </v-container>
   </v-app>
 </template>
 
-<!-- Script -->
 <script>
 import NavBar from "@/components/Navbar.vue";
 
 export default {
-  name: "Home",
+  name: "Teams",
 
   components: {
     NavBar,

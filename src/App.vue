@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-main><HomeView /></v-main>
+    <v-main>
+      <HomeView />
+    </v-main>
   </v-app>
 </template>
 
