@@ -11,7 +11,5 @@
 <script>
 export default {
   name: "Teams",
-
-  components: {},
 };
 </script>
