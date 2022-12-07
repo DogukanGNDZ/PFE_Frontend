@@ -1,7 +1,11 @@
 <template>
   
-    <v-container>
-      <v-form ref="form" v-model="valid">
+    <v-container class="register-page">
+        <v-card :loading="loading">
+            <v-card-title>
+                Inscription
+            <v-card-text>
+      <v-form ref="form" v-model="valid" :loading="loading">
         <v-text-field
           v-model="name"
           :counter="10"
@@ -15,6 +19,12 @@
           label="Prénom"
         ></v-text-field>
         <v-text-field
+          type="number"
+          v-model="age"
+          :rules="ageRules"
+          label="Age"
+        ></v-text-field>
+        <v-text-field
           v-model="email"
           :rules="emailRules"
           label="E-mail"
@@ -25,23 +35,29 @@
           :type="show ? 'text' : 'password'"
           :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
           @click:append="() => (show = !show)"
-          label="Password"
+          label="Mot de passe"
           hint="At least 8 characters"
         ></v-text-field>
         <v-btn @click="register" :disabled="!valid">
-          Register
+          S'enregistrer
         </v-btn>
       </v-form>
+    
+    </v-card-text>
+    </v-card-title>
+    </v-card>
     </v-container>
   
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
     name: "Register",
     data: () => ({
       valid: false,
       name: '',
+      firstName: '',
+      age: '',
       email: '',
       password: '',
       show: false,
@@ -52,6 +68,10 @@
       firstNameRules: [
         v => !!v || 'Name is required',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      ageRules: [
+        v => !!v || "L'age est requis",
+        v => (v <100 && v>6)|| 'Age must be valid'
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -71,4 +91,10 @@
       }
     }
   }
-  </script>
+</script>
+<style>
+  .register-page {
+    width: 400px;
+    margin: auto;
+  }
+</style>
