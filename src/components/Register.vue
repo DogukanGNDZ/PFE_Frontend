@@ -81,10 +81,27 @@ import User from '../models/user.js';
       ]
     }),
     methods: {
-        handleRegister() {
+      handleRegister(){
+        axios.post('http://localhost:5000/users/register', {
+          firstname: this.user.firstname, 
+          lastname: this.user.lastname, 
+          age: this.user.age, 
+          email: this.user.email, 
+          password: this.user.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+      }
+        /*handleRegister() {
             axios.post('http://localhost:5000/users/register',{firstname: this.user.firstname, lastname: this.user.lastname, age: this.user.age, email: this.user.email, password: this.user.password})
             .catch(e=>{console.log(e);this.error=e})
-      }
+      }*/
     }
   }
 </script>
