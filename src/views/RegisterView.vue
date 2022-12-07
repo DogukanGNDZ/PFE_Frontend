@@ -1,7 +1,7 @@
 <!-- Template -->
 <template>
     <v-app id="register">
-      <Register />
+        <Register />
     </v-app>
   </template>
   
@@ -43,5 +43,6 @@
     width: 50%;
     background: black;
   }
+
   </style>
   
