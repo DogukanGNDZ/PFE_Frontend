@@ -8,6 +8,7 @@
         <p text class="text-red">test</p>
       </div>
     </v-container>
+    <Register />
   </v-app>
 </template>
 
@@ -17,12 +18,14 @@ import { defineComponent } from "vue";
 
 import NavBar from "@/components/Navbar.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
+import Register from "@/components/Register.vue";
 export default defineComponent({
   name: "HomeView",
 
   components: {
     NavBar,
     HelloWorld,
+    Register
   },
 });
 </script>
