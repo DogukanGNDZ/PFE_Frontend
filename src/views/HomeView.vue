@@ -1,11 +1,11 @@
 <!-- Template -->
 <template>
-  <v-app id="home">
+  <v-app>
     <NavBar />
-    <HelloWorld />
-    <v-container fluid>
-      <div class="head">
-        <p text class="text-red">test</p>
+
+    <v-container>
+      <div>
+        <h1 text class="text-red mt-10">Home Page</h1>
       </div>
     </v-container>
     <Register />
@@ -14,8 +14,6 @@
 
 <!-- Script -->
 <script>
-import { defineComponent } from "vue";
-
 import NavBar from "@/components/Navbar.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Register from "@/components/Register.vue";
@@ -27,31 +25,5 @@ export default defineComponent({
     HelloWorld,
     Register
   },
-});
+};
 </script>
-
-<!-- Style -->
-<style scoped>
-.v-container {
-  padding: 16px 0;
-}
-.head {
-  position: relative;
-  text-align: center;
-  padding: 12px;
-  margin-bottom: 6px;
-  height: 400px;
-  width: 100%;
-  color: white;
-}
-
-head:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  background: black;
-}
-</style>

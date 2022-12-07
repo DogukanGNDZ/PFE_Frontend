@@ -13,7 +13,7 @@ export default {
   name: "App",
 
   components: {
-    RegisterView
+    RegisterView,
   },
 
   data: () => ({
