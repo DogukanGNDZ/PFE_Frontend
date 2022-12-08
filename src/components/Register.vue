@@ -3,9 +3,9 @@
     <v-container class="register-page">
         <v-card :loading="loading">
             <v-card-title>
-                Register
+              Registration
             <v-card-text>
-      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading">
+      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading" v-if="role=='player'">
         <v-text-field
           v-model="user.name"
           :counter="10"
@@ -17,12 +17,6 @@
           :counter="10"
           :rules="firstNameRules"
           label="Firstname"
-        ></v-text-field>
-        <v-text-field
-          type="number"
-          v-model="user.age"
-          :rules="ageRules"
-          label="Age"
         ></v-text-field>
         <v-text-field
           v-model="user.email"
@@ -39,7 +33,63 @@
           hint="At least 8 characters"
         ></v-text-field>
         <v-btn type="submit" :disabled="!valid">
-          S'enregistrer
+          Register
+        </v-btn>
+      </v-form>
+      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" :loading="loading" v-else-if="role=='coach'">
+        <v-text-field
+          v-model="user.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Lastname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.firstname"
+          :counter="10"
+          :rules="firstNameRules"
+          label="Firstname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.email"
+          :rules="emailRules"
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.password"
+          :rules="passwordRules"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+          @click:append="() => (show = !show)"
+          label="Password"
+          hint="At least 8 characters"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="!valid">
+          Register
+        </v-btn>
+      </v-form>
+      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" :loading="loading" v-else>
+        <v-text-field
+          v-model="club.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Name of the club"
+        ></v-text-field>
+        <v-text-field
+          v-model="club.email"
+          :rules="emailRules"
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="club.password"
+          :rules="passwordRules"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+          @click:append="() => (show = !show)"
+          label="Password"
+          hint="At least 8 characters"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="!valid">
+          Register
         </v-btn>
       </v-form>
     
@@ -51,13 +101,16 @@
 
 <script>
 import axios from 'axios';
-//import { server } from '../helper';
+import { server } from '../helper';
 import User from '../models/user.js';
+import Club from '../models/club.js';
   export default {
     name: "Register",
     data: () => ({
       valid: false,
-      user : new User('','',0,'',''),
+      user : new User('','',localStorage.getItem('role'),'',''),
+      club : new Club('','',''),
+      role: localStorage.getItem("role"),
       show: false,
       nameRules: [
         v => !!v || 'Le nom est requis',
@@ -66,10 +119,6 @@ import User from '../models/user.js';
       firstNameRules: [
         v => !!v || 'Name is required',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters'
-      ],
-      ageRules: [
-        v => !!v || "L'age est requis",
-        v => (v <100 && v>6)|| 'Age must be valid'
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -82,10 +131,10 @@ import User from '../models/user.js';
     }),
     methods: {
       handleRegister(){
-        axios.post('http://localhost:5000/users/register', {
+        axios.post(server.baseURLDev+'users/register', {
           firstname: this.user.firstname, 
-          lastname: this.user.lastname, 
-          age: this.user.age, 
+          lastname: this.user.lastname,
+          role: 'user',
           email: this.user.email, 
           password: this.user.password
           })
@@ -97,7 +146,40 @@ import User from '../models/user.js';
             // handle error
             console.log(error)
           })
-      }
+      },
+      handleRegisterCoach(){
+        axios.post(server.baseURLDev+'users/register', {
+          firstname: this.user.firstname, 
+          lastname: this.user.lastname,
+          role: 'coach',
+          email: this.user.email, 
+          password: this.user.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+        },
+        handleRegisterClub(){
+          axios.post(server.baseURLDev+'clubs/register', {
+          name: this.club.name,
+          role: 'club',
+          email: this.club.email, 
+          password: this.club.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+        },
         /*handleRegister() {
             axios.post('http://localhost:5000/users/register',{firstname: this.user.firstname, lastname: this.user.lastname, age: this.user.age, email: this.user.email, password: this.user.password})
             .catch(e=>{console.log(e);this.error=e})

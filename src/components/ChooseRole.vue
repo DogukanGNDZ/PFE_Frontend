@@ -19,8 +19,9 @@
 
             <v-card-actions>
             <v-btn
-                color="red lighten-2"
-                text
+                class="text-red"
+                @click="handlePlayer"
+                to="/register"
             >
                 Choose
             </v-btn>
@@ -63,8 +64,9 @@
 
             <v-card-actions>
             <v-btn
-                color="red lighten-2"
-                text
+                class="text-red"
+                @click="handleCoach"
+                to="/register"
             >
                 Choose
             </v-btn>
@@ -107,8 +109,10 @@
 
             <v-card-actions>
             <v-btn
-                color="red lighten-2"
-                text
+                class="text-red"
+                @click="handleClub"
+                to="/register"
+                
             >
                 Choose
             </v-btn>
@@ -139,44 +143,34 @@
 </template>
 
 <script>
-import axios from 'axios';
+//import axios from 'axios';
 //import { server } from '../helper';
-import User from '../models/user.js';
+//import User from '../models/user.js';
   export default {
     name: "Register",
     data: () => ({
       valid: false,
-      user : new User('','',0,'',''),
       show: false,
       show1: false,
       show2: false,
-      nameRules: [
-        v => !!v || 'Le nom est requis',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
-      ],
-      firstNameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
-      ],
-      ageRules: [
-        v => !!v || "L'age est requis",
-        v => (v <100 && v>6)|| 'Age must be valid'
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
-      ],
-      passwordRules: [
-        v => !!v || 'Password is required',
-        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
-      ]
     }),
     methods: {
-        handleRegister() {
-            axios.post('http://localhost:5000/user/register', this.user)
-            .catch(e=>{console.log(e);this.error=e})
+      handleCoach() {
+        localStorage.setItem("role", "coach")
+      },
+      handlePlayer() {
+        localStorage.setItem("role", "player")
+      },
+      handleClub() {
+        localStorage.setItem("role", "club")
       }
     }
+    // methods: {
+    //     handleRegister() {
+    //         axios.post('http://localhost:5000/user/register', this.user)
+    //         .catch(e=>{console.log(e);this.error=e})
+    //   }
+    // }
   }
 </script>
 <style>
