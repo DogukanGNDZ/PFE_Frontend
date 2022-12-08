@@ -1,93 +1,191 @@
 <template>
-  <v-container class="register-page">
-    <v-card :loading="loading">
-      <v-card-title>
-        Inscription
-        <v-card-text>
-          <v-form ref="form" v-model="valid" :loading="loading">
-            <v-text-field
-              v-model="name"
-              :counter="10"
-              :rules="nameRules"
-              label="Nom"
-            ></v-text-field>
-            <v-text-field
-              v-model="firstName"
-              :counter="10"
-              :rules="firstNameRules"
-              label="Prénom"
-            ></v-text-field>
-            <v-text-field
-              type="number"
-              v-model="age"
-              :rules="ageRules"
-              label="Age"
-            ></v-text-field>
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              :rules="passwordRules"
-              :type="show ? 'text' : 'password'"
-              :append-icon="
-                show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
-              "
-              @click:append="() => (show = !show)"
-              label="Mot de passe"
-              hint="At least 8 characters"
-            ></v-text-field>
-            <v-btn @click="register" :disabled="!valid"> S'enregistrer </v-btn>
-          </v-form>
-        </v-card-text>
-      </v-card-title>
+  
+    <v-container class="register-page">
+        <v-card :loading="loading">
+            <v-card-title>
+              Registration
+            <v-card-text>
+      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading" v-if="role=='player'">
+        <v-text-field
+          v-model="user.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Lastname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.firstname"
+          :counter="10"
+          :rules="firstNameRules"
+          label="Firstname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.email"
+          :rules="emailRules"
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.password"
+          :rules="passwordRules"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+          @click:append="() => (show = !show)"
+          label="Password"
+          hint="At least 8 characters"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="!valid">
+          Register
+        </v-btn>
+      </v-form>
+      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" :loading="loading" v-else-if="role=='coach'">
+        <v-text-field
+          v-model="user.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Lastname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.firstname"
+          :counter="10"
+          :rules="firstNameRules"
+          label="Firstname"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.email"
+          :rules="emailRules"
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.password"
+          :rules="passwordRules"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+          @click:append="() => (show = !show)"
+          label="Password"
+          hint="At least 8 characters"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="!valid">
+          Register
+        </v-btn>
+      </v-form>
+      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" :loading="loading" v-else>
+        <v-text-field
+          v-model="club.name"
+          :counter="10"
+          :rules="nameRules"
+          label="Name of the club"
+        ></v-text-field>
+        <v-text-field
+          v-model="club.email"
+          :rules="emailRules"
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="club.password"
+          :rules="passwordRules"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+          @click:append="() => (show = !show)"
+          label="Password"
+          hint="At least 8 characters"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="!valid">
+          Register
+        </v-btn>
+      </v-form>
+    
+    </v-card-text>
+    </v-card-title>
     </v-card>
   </v-container>
 </template>
 
 <script>
-export default {
-  name: "Register",
-  data: () => ({
-    valid: false,
-    name: "",
-    firstName: "",
-    age: "",
-    email: "",
-    password: "",
-    show: false,
-    nameRules: [
-      (v) => !!v || "Le nom est requis",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-    ],
-    firstNameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-    ],
-    ageRules: [
-      (v) => !!v || "L'age est requis",
-      (v) => (v < 100 && v > 6) || "Age must be valid",
-    ],
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+/.test(v) || "E-mail must be valid",
-    ],
-    passwordRules: [
-      (v) => !!v || "Password is required",
-      (v) => (v && v.length >= 8) || "Password must be at least 8 characters",
-    ],
-  }),
-  methods: {
-    register() {
-      this.$refs.form.validate();
-      if (!this.valid) return;
-
-      // submit the form
-    },
-  },
-};
+import axios from 'axios';
+import { server } from '../helper';
+import User from '../models/user.js';
+import Club from '../models/club.js';
+  export default {
+    name: "Register",
+    data: () => ({
+      valid: false,
+      user : new User('','',localStorage.getItem('role'),'',''),
+      club : new Club('','',''),
+      role: localStorage.getItem("role"),
+      show: false,
+      nameRules: [
+        v => !!v || 'Le nom est requis',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      firstNameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid'
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
+      ]
+    }),
+    methods: {
+      handleRegister(){
+        axios.post(server.baseURLDev+'users/register', {
+          firstname: this.user.firstname, 
+          lastname: this.user.lastname,
+          role: 'user',
+          email: this.user.email, 
+          password: this.user.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+      },
+      handleRegisterCoach(){
+        axios.post(server.baseURLDev+'users/register', {
+          firstname: this.user.firstname, 
+          lastname: this.user.lastname,
+          role: 'coach',
+          email: this.user.email, 
+          password: this.user.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+        },
+        handleRegisterClub(){
+          axios.post(server.baseURLDev+'clubs/register', {
+          name: this.club.name,
+          role: 'club',
+          email: this.club.email, 
+          password: this.club.password
+          })
+          .then(response => {
+            // handle success
+            console.log(response.data)
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          })
+        },
+        /*handleRegister() {
+            axios.post('http://localhost:5000/users/register',{firstname: this.user.firstname, lastname: this.user.lastname, age: this.user.age, email: this.user.email, password: this.user.password})
+            .catch(e=>{console.log(e);this.error=e})
+      }*/
+    }
+  }
 </script>
 <style>
 .register-page {
