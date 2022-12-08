@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="black" dark flat class="px-12">
+  <!-- <v-app-bar app color="black" dark flat class="px-12">
     <v-btn to="/">
       <v-icon color="red" left class="mr-2">fas fa-signature</v-icon> Recruit
     </v-btn>
@@ -11,6 +11,7 @@
     <v-btn class="text-white" to="/register">Register</v-btn>
   </v-app-bar>
   <router-view />
+  </v-app-bar> -->
 </template>
 
 <script>

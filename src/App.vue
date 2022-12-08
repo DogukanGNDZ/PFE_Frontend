@@ -1,15 +1,18 @@
 <template>
   <Sidebar />
   <div :style="{ 'margin-left': sidebarWidth }">
+    <Topbar />
+
     <router-view />
   </div>
 </template>
 
 <script>
+import Topbar from "@/components/Topbar.vue";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { sidebarWidth } from "@/components/sidebar/state";
 export default {
-  components: { Sidebar },
+  components: { Sidebar, Topbar },
   setup() {
     return { sidebarWidth };
   },
@@ -18,7 +21,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Poppins, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -32,9 +35,5 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
