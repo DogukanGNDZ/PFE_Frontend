@@ -5,6 +5,8 @@ import Register from "@/views/RegisterView.vue";
 import Role from "@/views/ChoseRoleView.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import Teams from "@/views/Teams.vue";
+import Login from "@/views/LoginView.vue";
+import Profil from "@/views/ProfilView.vue";
 
 const routes = [
   {
@@ -41,6 +43,16 @@ const routes = [
     path: "/role",
     name: "Role",
     component: Role,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/profil",
+    name: "Profil",
+    component: Profil,
   },
 ];
 

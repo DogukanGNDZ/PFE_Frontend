@@ -1,11 +1,11 @@
 <template>
   
     <v-container class="register-page">
-        <v-card :loading="loading">
+        <v-card>
             <v-card-title>
               Registration
             <v-card-text>
-      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading" v-if="role=='player'">
+      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" v-if="role=='player'">
         <v-text-field
           v-model="user.name"
           :counter="10"
@@ -36,7 +36,7 @@
           Register
         </v-btn>
       </v-form>
-      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" :loading="loading" v-else-if="role=='coach'">
+      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" v-else-if="role=='coach'">
         <v-text-field
           v-model="user.name"
           :counter="10"
@@ -67,7 +67,7 @@
           Register
         </v-btn>
       </v-form>
-      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" :loading="loading" v-else>
+      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" v-else>
         <v-text-field
           v-model="club.name"
           :counter="10"
