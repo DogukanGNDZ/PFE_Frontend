@@ -45,7 +45,7 @@
             </v-row>
 
         <v-row>
-
+          <p>aaaaaaaaaa{{firstname}}</p>
         </v-row>
   </v-container>
   <!-- <v-card class="mx-auto" max-width="434" tile>
@@ -93,16 +93,38 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { server } from '../helper';
+var firstname =""
 
   export default {
     name: "Profile",
+    beforeMount() {
+      axios.get(server.baseURLDev+'users/myprofil', {
+          headers: {
+            'Authorize': localStorage.getItem('token')
+          }
+        })
+        .then((response) =>{
+          this.userINfo = response.data;
+          firstname = response.data.firstname;
+
+          console.log(firstname);
+          console.log("aa");
+        })
+        .catch(error => {
+            // handle error
+            console.log(error)
+          })
+
+    },
     data: () => ({
         headers: [
           { text: "CATEGORY", value: "category" },
           { text: "VALUE", value: "value"},
         ],
         items: [
-          { category: "Firstname", value: "Jerome"},
+          { category: "Firstname", value: firstname },
           { category: "Lastname", value: "Dev"},
           { category: "Email", value: "jerome@gmail.com"},
           { category: "Age", value: "22"},
@@ -116,6 +138,7 @@
           { category: "Adresse", value: "5030 Gembloux Belgium"},
         ],
     }),
+
     methods: {
 
       
