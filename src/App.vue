@@ -16,7 +16,10 @@ export default {
   setup() {
     return { sidebarWidth };
   },
+  
 };
+
+
 </script>
 
 <style>

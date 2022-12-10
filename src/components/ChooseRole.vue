@@ -3,8 +3,7 @@
     <v-container class="role-page my-auto" no-gutters>
     <v-row no-gutters >
       <v-col class="px-5" sm="4">
-        <v-card class="cardRole"     @click="handlePlayer"
-                    to="/register">
+        <v-card class="cardRole"  @click="handlePlayer" to="/register">
                 <v-img
                   src="../assets/dunking.png"
                   class="w-100 h-100"

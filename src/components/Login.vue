@@ -5,7 +5,7 @@
             <v-card-title>
               Login
             <v-card-text>
-      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading">
+      <v-form ref="form" @submit.prevent="handleLogin"  method="post" v-model="valid" >
         <v-text-field
           v-model="email"
           :rules="emailRules"
@@ -34,7 +34,7 @@
 import axios from 'axios';
 import { server } from '../helper';
   export default {
-    name: "Register",
+    name: "Login",
     data: () => ({
       valid: false,
       email: '',
@@ -51,18 +51,28 @@ import { server } from '../helper';
     }),
     methods: {
       handleLogin(){
-        axios.post(server.baseURLDev+'users/login', {
+        console.log(this.email + this.password);
+        axios.post(server.baseURLDev+'auth/login', {
           email: this.email,
           password: this.password
           })
-          .then(response => {
-            // handle success
-            console.log(response.data)
+          .then((response) => { 
+            console.log(response.data);
+            localStorage.setItem("token", response.data)
+            location.href = "/";
+        //   if (response.data.access_token) {
+        //     let payload = {
+        //       token: response.data.access_token,
+        //       user : response.data.user
+        //     }
+        //     this.$store.dispatch(server.baseURLDev+'auth/login', payload )
+        //     this.$router.push({path:'/'})
+        //   }
           })
           .catch(error => {
             // handle error
             console.log(error)
-          })
+          });
       },
       
         /*handleRegister() {

@@ -7,6 +7,8 @@ import Dashboard from "@/views/Dashboard.vue";
 import Teams from "@/views/Teams.vue";
 import Login from "@/views/LoginView.vue";
 import Profil from "@/views/ProfilView.vue";
+import MyProfil from "@/views/MyProfilView.vue";
+import Logout from "@/components/Logout.vue";
 
 const routes = [
   {
@@ -53,6 +55,16 @@ const routes = [
     path: "/profil",
     name: "Profil",
     component: Profil,
+  },
+  {
+    path: "/myprofil",
+    name: "My Profil",
+    component: MyProfil,
+  },
+  {
+    path: "/logout",
+    name: "Log out",
+    component: Logout,
   },
 ];
 

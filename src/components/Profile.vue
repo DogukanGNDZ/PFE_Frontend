@@ -23,7 +23,11 @@
                             <EasyDataTable
                                 :headers="headers"
                                 :items="items"
+                                theme-color="#1d90ff"
+                                table-class-name="customize-table"
                                 hide-footer
+                                alternating
+                                no-hover
                                 />
                         </v-card-text>
                     </v-card>
@@ -126,4 +130,27 @@
   background-color: gray;
 
 }
+
+/* .customize-table {
+  --easy-table-border: 1px solid #445269;
+  --easy-table-row-border: 1px solid #445269;
+
+  --easy-table-header-font-size: 14px;
+  --easy-table-header-height: 30px;
+  --easy-table-header-font-color: #c1cad4;
+  --easy-table-header-background-color: #2d3a4f;
+
+  --easy-table-body-even-row-font-color: #fff;
+  --easy-table-body-even-row-background-color: #4c5d7a;
+
+  --easy-table-body-row-font-color: #c0c7d2;
+  --easy-table-body-row-background-color: #2d3a4f;
+  --easy-table-body-row-height: 50px;
+  --easy-table-body-row-font-size: 14px;
+
+  --easy-table-body-row-hover-font-color: #2d3a4f;
+  --easy-table-body-row-hover-background-color: #eee;
+
+  --easy-table-body-item-padding: 10px 15px;
+} */
 </style>
