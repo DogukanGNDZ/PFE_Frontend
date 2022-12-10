@@ -32,6 +32,8 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error" style="color:red">{{ errora }}</p>
+        <br/>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
@@ -63,6 +65,7 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error">{{ errora }}</p>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
@@ -88,6 +91,7 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error">{{ errora }}</p>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
@@ -107,6 +111,7 @@ import Club from '../models/club.js';
   export default {
     name: "Register",
     data: () => ({
+      errora: null,
       valid: false,
       user : new User('','',localStorage.getItem('role'),'',''),
       club : new Club('','',''),
@@ -144,6 +149,7 @@ import Club from '../models/club.js';
           })
           .catch(error => {
             // handle error
+            this.errora = "Email already used"
             console.log(error)
           })
       },

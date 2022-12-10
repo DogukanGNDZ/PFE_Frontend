@@ -14,6 +14,7 @@
       
     },
     mounted() {
+        localStorage.removeItem('token');
         location.href = "/"
     }
     

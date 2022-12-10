@@ -9,6 +9,18 @@ import Login from "@/views/LoginView.vue";
 import Profil from "@/views/ProfilView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
 import Logout from "@/components/Logout.vue";
+import axios from 'axios';
+import { server } from '../helper';
+
+if (localStorage.getItem('token')!==null){
+  axios.post(server.baseURLDev+'auth/confirm_token', {
+  token: localStorage.getItem('token'), 
+  })
+  .catch(error => {
+    location.href = "/logout"
+    console.log(error)
+  })
+}
 
 const routes = [
   {

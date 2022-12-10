@@ -8,10 +8,6 @@ export default {
     token: localStorage.getItem('token')
   }),
   methods: {
-    handleLogout(){
-      localStorage.removeItem('token');
-      // location.href = "/";
-    }
       
   },
   
@@ -37,7 +33,7 @@ export default {
     <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
     <SidebarLink to="/teams" icon="fas fa-users">Teams</SidebarLink>
     <SidebarLink to="/myprofil" icon="fas fa-users">My Profil</SidebarLink>
-    <SidebarLink @click="handleLogout" to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
+    <SidebarLink to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
     </div>
     <div v-else>    
     <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
