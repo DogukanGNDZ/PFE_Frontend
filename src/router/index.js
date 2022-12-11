@@ -5,6 +5,7 @@ import Register from "@/views/RegisterView.vue";
 import Role from "@/views/ChoseRoleView.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import Teams from "@/views/Teams.vue";
+import Players from "@/views/Players.vue";
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: "/role",
     name: "Role",
     component: Role,
+  },
+  {
+    path: "/players",
+    name: "Players",
+    component: Players,
   },
 ];
 
