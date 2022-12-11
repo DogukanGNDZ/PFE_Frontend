@@ -1,13 +1,18 @@
 <template>
-  <div class="home">
-    <h1>Teams</h1>
+  <div>
+    <FilterBar />
+    <TeamsGrid />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import FilterBar from "@/components/FilterBar.vue";
+import TeamsGrid from "@/components/TeamsGrid.vue";
 export default {
   name: "Teams",
+  components: {
+    TeamsGrid,
+    FilterBar,
+  },
 };
 </script>

@@ -24,8 +24,9 @@ export default {
     <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
     <SidebarLink to="/register" icon="fas fa-sign-in">Register</SidebarLink>
     <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
-    <SidebarLink to="/teams" icon="fas fa-users">Teams</SidebarLink>
+    <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
     <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
+    <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
 
     <span
       class="collapse-icon"
