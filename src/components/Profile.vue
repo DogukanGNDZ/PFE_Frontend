@@ -1,6 +1,6 @@
 <template>
   
-    <v-container class="Profile-page pa-0 ma-0">
+    <v-container class="Profile-page pa-0 ma-0" v-if="!edit">
         
  
             <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
@@ -8,6 +8,9 @@
             <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
               <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar>
+            </v-col>
+            <v-col>
+              <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
             </v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
@@ -43,10 +46,36 @@
 
                 </v-col>
             </v-row>
+  </v-container>
+  <v-container class="Profile-page pa-0 ma-0" v-else>
+    <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
+    <v-col>
+    <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+      <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+    </v-avatar>
+    </v-col>
+    <v-col>
+      <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
+    </v-col>
+    <v-row>
+      <v-col>
+        <p>Details</p>
+        <v-form ref="form" @submit.prevent="handleUpdateProfil" method="post" v-model="valid">
+          <li v-for="item in items" :key="item.category">
+          {{ item.category}} : <v-text-field v-model="item.value" :value="item.value"></v-text-field>
+          </li>
+          <v-btn type="submit">
+            Validate changes
+          </v-btn>
+        </v-form>
+        
 
-        <v-row>
-          <p>aaaaaaaaaa{{getFFirstname}}</p>
-        </v-row>
+      </v-col>
+      <v-col>
+        <p>About Me</p>
+        
+      </v-col>
+    </v-row>
   </v-container>
   <!-- <v-card class="mx-auto" max-width="434" tile>
           <v-img height="100%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
@@ -162,10 +191,15 @@ import { reactive} from 'vue';
 <script>
 import axios from 'axios';
 import { server } from '../helper';
+import tippy from 'tippy.js';
 
 
   export default {
     name: "Profile",
+    mounted() {
+    tippy('[data-tippy-content]');
+  },
+
     beforeMount() {
       axios.get(server.baseURLDev+'users/myprofil', {
           headers: {
@@ -177,7 +211,6 @@ import { server } from '../helper';
           this.items[0].value = response.data.firstname;
           this.items[1].value = response.data.lastname;
           this.items[2].value = response.data.email;
-          console.log(response.data.description.length +"a")
           if (response.data.description.length != 0){
             this.description = response.data.description;
           }
@@ -195,10 +228,13 @@ import { server } from '../helper';
             // handle error
             console.log(error)
           })
+      // axios.get(server.baseURLDev+'sports/userSport', {
 
+      // }
     },
     data: () => ({
         description: "No description yet",
+        edit: false,
         headers: [
           { text: "CATEGORY", value: "category" },
           { text: "VALUE", value: "value"},
@@ -220,6 +256,35 @@ import { server } from '../helper';
     }),
 
     methods: {
+      handleEdit(){
+        this.edit = !this.edit;
+      },
+      handleUpdateProfil(){
+        axios.put(server.baseURLDev+'users/update',{
+          headers: {
+            'Authorize': localStorage.getItem('token')
+          },
+          firstname : this.items[0].value,
+          lastname : this.items[1].value,
+          email : this.items[2].value,
+          age : this.items[3].value,
+          post: this.items[6].value,
+          size : this.items[7].value,
+          weight : this.items[8].value,
+          nYe : this.items[9].value,
+          description : this.description,
+          picture : '',
+
+
+        })
+        .then((response) => { 
+            console.log(response.data);
+          })
+          .catch(error => {
+            // handle error
+            console.log(error)
+          });
+      }
 
 
     },
