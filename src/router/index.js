@@ -5,6 +5,8 @@ import Register from "@/views/RegisterView.vue";
 import Role from "@/views/ChoseRoleView.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import Teams from "@/views/Teams.vue";
+import Players from "@/views/Players.vue";
+import Coachs from "@/views/Coachs.vue";
 import Login from "@/views/LoginView.vue";
 import Profil from "@/views/ProfilView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
@@ -77,6 +79,16 @@ const routes = [
     path: "/logout",
     name: "Log out",
     component: Logout,
+  },
+  {
+    path: "/players",
+    name: "Players",
+    component: Players,
+  },
+  {
+    path: "/coachs",
+    name: "Coachs",
+    component: Coachs,
   },
 ];
 

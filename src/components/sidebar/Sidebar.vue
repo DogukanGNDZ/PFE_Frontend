@@ -31,7 +31,9 @@ export default {
     <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
     <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
     <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
-    <SidebarLink to="/teams" icon="fas fa-users">Teams</SidebarLink>
+    <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
+    <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
+    <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
     <SidebarLink to="/myprofil" icon="fas fa-users">My Profil</SidebarLink>
     <SidebarLink to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
     </div>
@@ -41,8 +43,12 @@ export default {
     <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
     <SidebarLink to="/login" icon="fa-solid fa-user">Login</SidebarLink>
     <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
-    <SidebarLink to="/teams" icon="fas fa-users">Teams</SidebarLink>
+    <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
+    <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
+    <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
     </div>
+
+
     <span
       class="collapse-icon"
       :class="{ 'rotate-180': collapsed }"
