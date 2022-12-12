@@ -260,10 +260,13 @@ import tippy from 'tippy.js';
         this.edit = !this.edit;
       },
       handleUpdateProfil(){
-        axios.put(server.baseURLDev+'users/update',{
-          headers: {
-            'Authorize': localStorage.getItem('token')
-          },
+        console.log(localStorage.getItem('token'))
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorize': localStorage.getItem('token')
+        };
+
+        const body = {
           firstname : this.items[0].value,
           lastname : this.items[1].value,
           email : this.items[2].value,
@@ -271,12 +274,12 @@ import tippy from 'tippy.js';
           post: this.items[6].value,
           size : this.items[7].value,
           weight : this.items[8].value,
-          nYe : this.items[9].value,
+          number_year_experience : this.items[9].value,
           description : this.description,
-          picture : '',
+          picture : "",
+        };
 
-
-        })
+        axios.put(server.baseURLDev+'users/update', body, { headers: headers })
         .then((response) => { 
             console.log(response.data);
           })
