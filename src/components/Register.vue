@@ -138,7 +138,7 @@ import Club from '../models/club.js';
       handleRegister(){
         axios.post(server.baseURLDev+'users/register', {
           firstname: this.user.firstname, 
-          lastname: this.user.lastname,
+          lastname: this.user.name,
           role: 'user',
           email: this.user.email, 
           password: this.user.password
@@ -156,7 +156,7 @@ import Club from '../models/club.js';
       handleRegisterCoach(){
         axios.post(server.baseURLDev+'users/register', {
           firstname: this.user.firstname, 
-          lastname: this.user.lastname,
+          lastname: this.user.name,
           role: 'coach',
           email: this.user.email, 
           password: this.user.password
