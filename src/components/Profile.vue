@@ -260,6 +260,7 @@ import tippy from 'tippy.js';
         this.edit = !this.edit;
       },
       handleUpdateProfil(){
+        console.log(localStorage.getItem('token'))
         axios.put(server.baseURLDev+'users/update',{
           headers: {
             'Authorize': localStorage.getItem('token')
@@ -271,9 +272,9 @@ import tippy from 'tippy.js';
           post: this.items[6].value,
           size : this.items[7].value,
           weight : this.items[8].value,
-          nYe : this.items[9].value,
+          number_year_experience : this.items[9].value,
           description : this.description,
-          picture : '',
+          picture : "",
 
 
         })
