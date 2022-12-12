@@ -14,9 +14,8 @@
         ></v-text-field>
       </v-col>
       <v-col cols="4" class="text-right">
-        <v-btn icon="fa-solid fa-user" class="ml-3" to="/profil"></v-btn>
+        <v-btn icon="fa-solid fa-user" class="ml-3" to="/profil" data-tippy-content="My profile"></v-btn>
         <v-btn id="myButton" icon="fas fa-home" class="ml-3" data-tippy-content="Hello, world!"></v-btn>
-        <v-btn icon="fas fa-home" class="ml-3"></v-btn>
       </v-col>
     </v-row>
   </v-container>
