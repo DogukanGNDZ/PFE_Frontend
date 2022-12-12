@@ -51,7 +51,6 @@ import { server } from '../helper';
     }),
     methods: {
       handleLogin(){
-        console.log(this.email + this.password);
         axios.post(server.baseURLDev+'auth/login', {
           email: this.email,
           password: this.password
@@ -59,6 +58,7 @@ import { server } from '../helper';
           .then((response) => { 
             console.log(response.data);
             localStorage.setItem("token", response.data)
+            localStorage.setItem("email", this.email)
             location.href = "/";
         //   if (response.data.access_token) {
         //     let payload = {

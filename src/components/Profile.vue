@@ -22,7 +22,7 @@
                         <v-card-text>
                             <EasyDataTable
                                 :headers="headers"
-                                :items="items"
+                                :items= "items"
                                 theme-color="#1d90ff"
                                 table-class-name="customize-table"
                                 hide-footer
@@ -37,7 +37,7 @@
                     <v-card height="100%">
                         <v-card-title>About Me</v-card-title>
                         <v-card-text>
-                            I play football for 5 years now and I'm searching a club around Gembloux.
+                            {{description}}
                         </v-card-text>
                     </v-card>
 
@@ -45,7 +45,7 @@
             </v-row>
 
         <v-row>
-          <p>aaaaaaaaaa{{firstname}}</p>
+          <p>aaaaaaaaaa{{getFFirstname}}</p>
         </v-row>
   </v-container>
   <!-- <v-card class="mx-auto" max-width="434" tile>
@@ -92,39 +92,46 @@
         </v-row> -->
 </template>
 
-<script>
-import axios from 'axios';
-import { server } from '../helper';
-var firstname =""
+<!-- <script>
+// import axios from 'axios';
+// import { server } from '../helper';
+import { mapGetters } from 'vuex'
+import { reactive} from 'vue';
 
   export default {
     name: "Profile",
-    beforeMount() {
-      axios.get(server.baseURLDev+'users/myprofil', {
-          headers: {
-            'Authorize': localStorage.getItem('token')
-          }
-        })
-        .then((response) =>{
-          this.userINfo = response.data;
-          firstname = response.data.firstname;
+    // beforeMount() {
+    //   axios.get(server.baseURLDev+'users/myprofil', {
+    //       headers: {
+    //         'Authorize': localStorage.getItem('token')
+    //       }
+    //     })
+    //     .then((response) =>{
+    //       this.userINfo = response.data;
+    //       this.firstname = response.data.firstname;
 
-          console.log(firstname);
-          console.log("aa");
-        })
-        .catch(error => {
-            // handle error
-            console.log(error)
-          })
+    //       console.log(this.firstname);
+    //       console.log("aa");
+    //     })
+    //     .catch(error => {
+    //         // handle error
+    //         console.log(error)
+    //       })
 
+    // },
+    created() {
+        this.$store.dispatch('searchUserByToken')
+        this.items[0].value = this.$store.getters.getFirstname
     },
-    data: () => ({
+    data () {
+        return reactive({
+        firstname: '',
         headers: [
           { text: "CATEGORY", value: "category" },
           { text: "VALUE", value: "value"},
         ],
         items: [
-          { category: "Firstname", value: firstname },
+          { category: "Firstname", value: '' },
           { category: "Lastname", value: "Dev"},
           { category: "Email", value: "jerome@gmail.com"},
           { category: "Age", value: "22"},
@@ -137,13 +144,86 @@ var firstname =""
           { category: "Actual CLub", value: "/"},
           { category: "Adresse", value: "5030 Gembloux Belgium"},
         ],
-    }),
+
+    });},
+    computed: {
+        ...mapGetters({
+        getFFirstname: 'getFirstname',
+        }),
+    },
 
     methods: {
 
       
     },
     
+  }
+</script> -->
+<script>
+import axios from 'axios';
+import { server } from '../helper';
+
+
+  export default {
+    name: "Profile",
+    beforeMount() {
+      axios.get(server.baseURLDev+'users/myprofil', {
+          headers: {
+            'Authorize': localStorage.getItem('token')
+          }
+        })
+        .then((response) =>{
+          console.log(response);
+          this.items[0].value = response.data.firstname;
+          this.items[1].value = response.data.lastname;
+          this.items[2].value = response.data.email;
+          console.log(response.data.description.length +"a")
+          if (response.data.description.length != 0){
+            this.description = response.data.description;
+          }
+          if (response.data.age != 0) {
+            this.items[3].value = response.data.age;
+          }
+          if (response.data.size != 0) {
+            this.items[7].value = response.data.size;
+          }
+          if (response.data.weight != 0) {
+            this.items[8].value = response.data.weight;
+          }
+        })
+        .catch(error => {
+            // handle error
+            console.log(error)
+          })
+
+    },
+    data: () => ({
+        description: "No description yet",
+        headers: [
+          { text: "CATEGORY", value: "category" },
+          { text: "VALUE", value: "value"},
+        ],
+        items: [
+          { category: "Firstname", value: '' },
+          { category: "Lastname", value: "Dev"},
+          { category: "Email", value: "jerome@gmail.com"},
+          { category: "Age", value: "/"},
+          { category: "Role", value: "Player"},
+          { category: "Sport", value: "Football"},
+          { category: "Position", value: "Forward"},
+          { category: "Size", value: "/"},
+          { category: "Weight", value: "/"},
+          { category: "Years of experience", value: "5"},
+          { category: "Actual CLub", value: "/"},
+          { category: "Adresse", value: "5030 Gembloux Belgium"},
+        ],
+    }),
+
+    methods: {
+
+
+    },
+
   }
 </script>
 <style>
