@@ -2,7 +2,14 @@
   <v-container>
     <!-- ROW -->
     <v-row class="mx-3">
-      <v-col cols="12" xs="12" sm="6" md="4">
+      <v-col
+        v-for="coach in this.coachs"
+        :key="coach.id"
+        cols="12"
+        xs="12"
+        sm="6"
+        md="4"
+      >
         <v-card class="playerCard">
           <!-- ROW -->
           <v-row>
@@ -14,13 +21,15 @@
                 alt=""
               >
               </v-img>
-              <p class="float-left ml-3 namePlayer">Marc Wilmott</p>
+              <p class="float-left ml-3 namePlayer">
+                {{ coach.firstname }} {{ coach.lastname }}
+              </p>
             </v-col>
           </v-row>
           <v-row class="mb-3">
             <v-card-text class="text-left textCard">
               <p class="mb-2">
-                44 years <br />
+                {{ coach.age }} years <br />
                 Football
               </p>
               <p class="my-2">
@@ -49,7 +58,8 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
+import { server } from "../helper";
 
 export default {
   name: "CoachsGrid",
@@ -59,7 +69,12 @@ export default {
     };
   },
   mounted() {
-    //axios.get("url").then((response) => (this.players = response.data));
+    axios
+      .get(server.baseURLDev + "coachs")
+      .then((response) => (this.coachs = response.data))
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

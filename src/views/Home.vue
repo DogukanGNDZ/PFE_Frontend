@@ -96,23 +96,10 @@
         </v-row>
       </v-container>
     </section>
-
-    <!-- SECTION 3-->
-    <section class="section3">
-      <v-container>
-        <v-row class="text-left mx-3" align="center" justify="center">
-          <v-col cols="12" xs="12" sm="4" md="4"> 1 </v-col>
-          <v-col cols="12" xs="12" sm="4" md="4"> 1 </v-col>
-          <v-col cols="12" xs="12" sm="4" md="4"> 1 </v-col>
-        </v-row>
-      </v-container>
-    </section>
   </v-app>
 </template>
 
 <script>
-//import Undraw1 from "../assets/logo.svg";
-
 export default {
   name: "Home",
 };
