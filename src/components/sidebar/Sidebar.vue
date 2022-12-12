@@ -22,7 +22,7 @@ export default {
 
     <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
     <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-    <SidebarLink to="/register" icon="fas fa-sign-in">Register</SidebarLink>
+    <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
     <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
     <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
     <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
