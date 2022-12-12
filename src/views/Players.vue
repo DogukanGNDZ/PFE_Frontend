@@ -1,17 +1,17 @@
 <template>
   <div>
     <FilterBar />
-    <TeamsGrid />
+    <PlayerGrid />
   </div>
 </template>
 
 <script>
+import PlayerGrid from "@/components/PlayersGrid.vue";
 import FilterBar from "@/components/FilterBar.vue";
-import TeamsGrid from "@/components/TeamsGrid.vue";
 export default {
-  name: "Teams",
+  name: "Player",
   components: {
-    TeamsGrid,
+    PlayerGrid,
     FilterBar,
   },
 };
