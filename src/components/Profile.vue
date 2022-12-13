@@ -62,7 +62,10 @@
         <p>Details</p>
         <v-form ref="form" @submit.prevent="handleUpdateProfil" method="post" v-model="valid">
           <li v-for="item in items" :key="item.category">
-          {{ item.category}} : <v-text-field v-model="item.value" :value="item.value"></v-text-field>
+            <v-row>
+            <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
+            <v-col class="my-auto"><v-text-field style="background-color : white" v-model="item.value" :value="item.value" class="text-xs-center"></v-text-field></v-col>
+            </v-row>
           </li>
           <v-btn type="submit">
             Validate changes
@@ -217,20 +220,33 @@ import tippy from 'tippy.js';
           if (response.data.age != 0) {
             this.items[3].value = response.data.age;
           }
+          if (response.data.post.length != 0){
+            this.items[6].value = response.data.post;
+          }
           if (response.data.size != 0) {
             this.items[7].value = response.data.size;
           }
           if (response.data.weight != 0) {
             this.items[8].value = response.data.weight;
           }
+          this.items[9].value = response.data.number_year_experience;
+
         })
         .catch(error => {
             // handle error
             console.log(error)
           })
-      // axios.get(server.baseURLDev+'sports/userSport', {
-
-      // }
+      axios.get(server.baseURLDev+'sports/userSport', {
+        email : this.items[2].value
+       })
+       .then(response => {
+        console.log("spooooort")
+        console.log(response)
+       })
+       .catch(error => {
+            // handle error
+            console.log(error)
+          })
     },
     data: () => ({
         description: "No description yet",
@@ -244,9 +260,9 @@ import tippy from 'tippy.js';
           { category: "Lastname", value: "/"},
           { category: "Email", value: "/"},
           { category: "Age", value: "/"},
-          { category: "Role", value: "Player"},
-          { category: "Sport", value: "Football"},
-          { category: "Position", value: "/"},
+          { category: "Role", value: "/"},
+          { category: "Sport", value: "/"},
+          { category: "Post", value: "/"},
           { category: "Size", value: "/"},
           { category: "Weight", value: "/"},
           { category: "Years of experience", value: "/"},
@@ -302,20 +318,20 @@ import tippy from 'tippy.js';
 
 }
 
-/* .customize-table {
+ .customize-table {
   --easy-table-border: 1px solid #445269;
   --easy-table-row-border: 1px solid #445269;
-
+  background: linear-gradient(#0e0d0d, #2e2e2e);
   --easy-table-header-font-size: 14px;
   --easy-table-header-height: 30px;
   --easy-table-header-font-color: #c1cad4;
   --easy-table-header-background-color: #2d3a4f;
 
   --easy-table-body-even-row-font-color: #fff;
-  --easy-table-body-even-row-background-color: #4c5d7a;
+  --easy-table-body-even-row-background-color: #000000;
 
   --easy-table-body-row-font-color: #c0c7d2;
-  --easy-table-body-row-background-color: #2d3a4f;
+  --easy-table-body-row-background-color: ;
   --easy-table-body-row-height: 50px;
   --easy-table-body-row-font-size: 14px;
 
@@ -323,5 +339,5 @@ import tippy from 'tippy.js';
   --easy-table-body-row-hover-background-color: #eee;
 
   --easy-table-body-item-padding: 10px 15px;
-} */
+} 
 </style>
