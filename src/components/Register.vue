@@ -1,11 +1,11 @@
 <template>
   
     <v-container class="register-page">
-        <v-card :loading="loading">
+        <v-card>
             <v-card-title>
               Registration
             <v-card-text>
-      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" :loading="loading" v-if="role=='player'">
+      <v-form ref="form" @submit.prevent="handleRegister" method="post" v-model="valid" v-if="role=='player'">
         <v-text-field
           v-model="user.name"
           :counter="10"
@@ -32,11 +32,13 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error" style="color:red">{{ errora }}</p>
+        <br/>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
       </v-form>
-      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" :loading="loading" v-else-if="role=='coach'">
+      <v-form ref="form" @submit.prevent="handleRegisterCoach" method="post" v-model="valid" v-else-if="role=='coach'">
         <v-text-field
           v-model="user.name"
           :counter="10"
@@ -63,11 +65,12 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error">{{ errora }}</p>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
       </v-form>
-      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" :loading="loading" v-else>
+      <v-form ref="form" @submit.prevent="handleRegisterClub" method="post" v-model="valid" v-else>
         <v-text-field
           v-model="club.name"
           :counter="10"
@@ -88,6 +91,7 @@
           label="Password"
           hint="At least 8 characters"
         ></v-text-field>
+        <p v-if="errora" class="error">{{ errora }}</p>
         <v-btn type="submit" :disabled="!valid">
           Register
         </v-btn>
@@ -107,6 +111,7 @@ import Club from '../models/club.js';
   export default {
     name: "Register",
     data: () => ({
+      errora: null,
       valid: false,
       user : new User('','',localStorage.getItem('role'),'',''),
       club : new Club('','',''),
@@ -133,7 +138,7 @@ import Club from '../models/club.js';
       handleRegister(){
         axios.post(server.baseURLDev+'users/register', {
           firstname: this.user.firstname, 
-          lastname: this.user.lastname,
+          lastname: this.user.name,
           role: 'user',
           email: this.user.email, 
           password: this.user.password
@@ -144,13 +149,14 @@ import Club from '../models/club.js';
           })
           .catch(error => {
             // handle error
+            this.errora = "Email already used"
             console.log(error)
           })
       },
       handleRegisterCoach(){
-        axios.post(server.baseURLDev+'users/register', {
+        axios.post(server.baseURLDev+'coach/register', {
           firstname: this.user.firstname, 
-          lastname: this.user.lastname,
+          lastname: this.user.name,
           role: 'coach',
           email: this.user.email, 
           password: this.user.password
