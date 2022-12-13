@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mx-3">
       <v-col cols="12" xs="12" sm="12" md="12">
-        <v-card class="playerCard">
+        <v-card class="playerCard" @click="redirectToAnnounce()">
           <!-- ROW -->
           <v-row>
             <v-col cols="2">
@@ -75,20 +75,28 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
+import { server } from "../helper";
 
 export default {
-  name: "PlayerGrid",
-  data: () => ({
-    items: [
-      { title: "Click Me1" },
-      { title: "Click Me2" },
-      { title: "Click Me3" },
-      { title: "Click Me4" },
-    ],
-  }),
+  name: "TeamsGrid",
+  data() {
+    return {
+      clubs: [],
+    };
+  },
   mounted() {
-    // axios.get("url").then((response) => (this.players = response.data));
+    axios
+      .get(server.baseURLDev + "clubs")
+      .then((response) => console.log(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  methods: {
+    redirectToAnnounce() {
+      this.$router.push({ path: "/profileClub" });
+    },
   },
 };
 </script>

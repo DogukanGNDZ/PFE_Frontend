@@ -7,6 +7,7 @@ import Dashboard from "@/views/Dashboard.vue";
 import Teams from "@/views/Teams.vue";
 import Players from "@/views/Players.vue";
 import Coachs from "@/views/Coachs.vue";
+import ProfileClub from "@/views/ProfileClub.vue";
 
 const routes = [
   {
@@ -53,6 +54,11 @@ const routes = [
     path: "/coachs",
     name: "Coachs",
     component: Coachs,
+  },
+  {
+    path: "/profileClub",
+    name: "ProfileClub",
+    component: ProfileClub,
   },
 ];
 
