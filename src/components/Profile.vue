@@ -56,6 +56,11 @@
     </v-col>
     <v-col>
       <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
+      <div>
+        <input type="file" @change="onFileChange">
+        <img v-if="imageUrl" :src="imageUrl" />
+        <v-btn @click="uploadImage">Upload Image</v-btn>
+      </div>
     </v-col>
     <v-row>
       <v-col>
@@ -234,6 +239,8 @@ import tippy from 'tippy.js';
     },
     data: () => ({
         description: "No description yet",
+        imageUrl: null,
+        imageData: null,
         edit: false,
         headers: [
           { text: "CATEGORY", value: "category" },
@@ -287,8 +294,35 @@ import tippy from 'tippy.js';
             // handle error
             console.log(error)
           });
-      }
+      },
+      onFileChange(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageUrl = e.target.result;
+        this.imageData = file;
+      };
+      reader.readAsDataURL(file);
+    },
+    uploadImage() {
+      const formData = new FormData();
+      formData.append('image', this.imageData);
 
+      axios.post(server.baseURLDev+'users/uploadImage', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorize': localStorage.getItem('token')
+        },
+      })
+        .then((response) => {
+          // Handle the response from the server
+          console.log(response)
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error)
+        });
+    },
 
     },
 
