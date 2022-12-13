@@ -5,6 +5,7 @@
         <v-col cols="12">
           <v-img src="../assets/logo.png" class="imgTeams"></v-img>
           <h2>National Basketball Vue</h2>
+          <h2>{{ this.$route.params.id }}</h2>
           <div class="my-3">
             <v-btn class="ma-2" outlined rounded color="success">
               Demande d'inscription
@@ -49,7 +50,24 @@
 </template>
 
 <script>
+import axios from "axios";
+import { server } from "../helper";
 export default {
   name: "ProfileClub",
+  data() {
+    return {
+      infoClub: [],
+    };
+  },
+  mounted() {
+    const id = this.$route.params.id;
+    console.log(id);
+    axios
+      .get(server.baseURLDev + "users/id/" + id)
+      .then((response) => console.log(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 </script>

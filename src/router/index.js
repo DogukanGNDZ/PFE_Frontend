@@ -92,11 +92,7 @@ const routes = [
     name: "Coachs",
     component: Coachs,
   },
-  {
-    path: "/profileClub",
-    name: "ProfileClub",
-    component: ProfileClub,
-  },
+  { path: "/club/:id", component: ProfileClub },
 ];
 
 const router = createRouter({
