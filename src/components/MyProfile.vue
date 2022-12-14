@@ -6,7 +6,7 @@
             <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
             <v-col>
             <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
-              <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+              <v-img v-if="imageUrl" :src="imageUrl" ></v-img>
             </v-avatar>
             </v-col>
             <v-col>
@@ -51,14 +51,13 @@
     <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
     <v-col>
     <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
-      <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+      <v-img v-if="imageUrl" :src="imageUrl" ></v-img>
     </v-avatar>
     </v-col>
     <v-col>
       <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
       <div>
         <input type="file" @change="onFileChange">
-        <img v-if="imageUrl" :src="imageUrl" />
         <v-btn @click="uploadImage">Upload Image</v-btn>
       </div>
     </v-col>
@@ -216,15 +215,13 @@ import { server } from '../helper';
 import tippy from 'tippy.js';
 // import { response } from 'express';
 
-
   export default {
     name: "Profile",
     mounted() {
     tippy('[data-tippy-content]');
-
   },
 
-    beforeMount() {
+     beforeMount() {
       axios.get(server.baseURLDev+'users/myprofil', {
           headers: {
             'Authorize': localStorage.getItem('token')
@@ -251,6 +248,8 @@ import tippy from 'tippy.js';
             this.items[8].value = response.data.weight;
           }
           this.items[9].value = response.data.number_year_experience;
+          this.imageName=response.data.picture;
+          this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/${this.imageName}`;
 
         })
         .catch(error => {
@@ -320,10 +319,12 @@ import tippy from 'tippy.js';
       .catch(error => {
             console.log(error)
           })
+        
 
     },
 
     data: () => ({
+        imageName:'',
         imageUrl: null,
         imageData: null,
         country : "",
