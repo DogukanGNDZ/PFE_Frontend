@@ -8,8 +8,7 @@ import Teams from "@/views/Teams.vue";
 import Players from "@/views/Players.vue";
 import Coachs from "@/views/Coachs.vue";
 import Login from "@/views/LoginView.vue";
-import Profil from "@/views/MyProfilView.vue";
-import MyProfil from "@/views/MyProfilViewreserve.vue";
+import MyProfil from "@/views/MyProfilView.vue";
 import Logout from "@/components/Logout.vue";
 import axios from 'axios';
 import { server } from '../helper';
@@ -64,11 +63,6 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
-  },
-  {
-    path: "/profil",
-    name: "Profil",
-    component: Profil,
   },
   {
     path: "/myprofil",
