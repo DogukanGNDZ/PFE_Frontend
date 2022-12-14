@@ -13,6 +13,7 @@ import MyProfil from "@/views/MyProfilView.vue";
 import Notification from "@/views/NotificationView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
+import MyClub from "@/components/MyClub.vue";
 import axios from "axios";
 import { server } from "../helper";
 
@@ -95,6 +96,11 @@ const routes = [
   },
   { path: "/clubs/:id", component: ProfileClub },
   { path: "/players/:id", component: ProfilePlayer },
+  {
+    path: "/myClub",
+    name: "My Club",
+    component: MyClub,
+  },
 ];
 
 const router = createRouter({
