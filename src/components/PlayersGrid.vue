@@ -70,7 +70,12 @@ export default {
   mounted() {
     axios
       .get(server.baseURLDev + "users")
-      .then((response) => (this.players = response.data))
+      .then(response => {      
+        console.log('liste')
+      console.log(response)
+      this.players = response.data})
+      
+
       .catch((error) => {
         console.log(error);
       });

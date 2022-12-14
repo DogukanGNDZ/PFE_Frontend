@@ -1,20 +1,22 @@
+
 <template>
     <v-app>
-      <MyProfil />
+      <Profil />
     </v-app>
   </template>
   
   <script>
-  import MyProfil from "@/components/MyProfil.vue";
+  import Profil from "@/components/MyProfile.vue";
   
   export default {
-    name: "MyProfilView",
+    name: "ProfilView",
   
     components: {
-      MyProfil,
+      Profil,
     },
   };
   </script>
   
   <!-- Style -->
   <style scoped></style>
+  

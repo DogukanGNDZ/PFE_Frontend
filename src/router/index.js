@@ -9,7 +9,6 @@ import Players from "@/views/Players.vue";
 import Coachs from "@/views/Coachs.vue";
 import ProfileClub from "@/views/ProfileClub.vue";
 import Login from "@/views/LoginView.vue";
-import Profil from "@/views/ProfilView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
@@ -67,11 +66,6 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
-  },
-  {
-    path: "/profil",
-    name: "Profil",
-    component: Profil,
   },
   {
     path: "/myprofil",
