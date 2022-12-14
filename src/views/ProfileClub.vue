@@ -25,15 +25,25 @@
           </v-card>
         </v-col>
       </v-row>
+
       <v-row class="mx-1 mt-5">
         <h3>Teams :</h3>
-        <v-col cols="12">
+        <v-col v-for="(team, i) in this.teams" :key="i" cols="12">
           <v-card class="pa-3">
-            <h3 class="text-left">Category</h3>
+            <h3 class="text-left">{{ team.category }}</h3>
             <v-card-text class="text-left">
-              <p>Info about teams</p>
-              <p>Number of players</p>
+              <p>Number of players : {{ team.number_players }}</p>
+              <p>Players :</p>
             </v-card-text>
+            <v-row>
+              <v-col
+                v-for="(player, j) in this.listPlayer[i]"
+                :key="j"
+                cols="12"
+              >
+                {{ player.firstname }} {{ player.lastname }}
+              </v-col>
+            </v-row>
           </v-card>
         </v-col>
       </v-row>
@@ -44,31 +54,54 @@
 <script>
 import axios from "axios";
 import { server } from "../helper";
+
 export default {
   name: "ProfileClub",
   data() {
     return {
       infoClub: [],
       teams: [],
+      listPlayer: [[]],
+      emailClub: null,
     };
   },
-  mounted() {
+  async mounted() {
     const id = this.$route.params.id;
-    axios
+    await axios
       .get(server.baseURLDev + "users/id/" + id)
-      .then((response) => (this.infoClub = response.data))
+      .then((response) => {
+        this.infoClub = response.data;
+        this.emailClub = response.data.email;
+      })
       .catch((error) => {
         console.log(error);
       });
 
-    axios
-      .get(
-        server.baseURLDev + "clubs/getTeamsClub?email=" + this.infoClub.email
-      )
-      .then((response) => console.log(response.data))
+    await axios
+      .get(server.baseURLDev + "clubs/getTeamsClub?email=" + this.emailClub)
+      .then((response) => {
+        this.teams = response.data;
+      })
       .catch((error) => {
         console.log(error);
       });
+
+    this.teams.filter((value, index) => {
+      console.log("Value id : " + value.id);
+      console.log("Index " + index);
+
+      axios
+        .get(server.baseURLDev + "teams/teamsPlayer?id_team=" + value.id)
+        .then((response) => {
+          this.listPlayer[index] = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(this.listPlayer);
+    });
   },
+
+  methods: {},
 };
 </script>

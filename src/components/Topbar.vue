@@ -77,7 +77,6 @@ export default {
   methods: {},
   mounted() {
     let email = localStorage.getItem("email");
-    console.log(email);
     if (email !== null) {
       console.log("email != null :");
       axios
