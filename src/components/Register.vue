@@ -154,7 +154,7 @@ import Club from '../models/club.js';
           })
       },
       handleRegisterCoach(){
-        axios.post(server.baseURLDev+'coach/register', {
+        axios.post(server.baseURLDev+'coachs/register', {
           firstname: this.user.firstname, 
           lastname: this.user.name,
           role: 'coach',

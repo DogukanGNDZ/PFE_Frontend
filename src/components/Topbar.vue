@@ -13,8 +13,11 @@
           single-line
         ></v-text-field>
       </v-col>
-      <v-col cols="4" class="text-right">
+      <v-col cols="4" class="text-right" v-if="token!==null">
         <v-btn icon="fa-solid fa-user" class="ml-3" to="/profil" data-tippy-content="My profile"></v-btn>
+        <v-btn id="myButton" icon="fas fa-home" class="ml-3" data-tippy-content="Hello, world!"></v-btn>
+      </v-col>
+      <v-col cols="4" class="text-right" v-else>
         <v-btn id="myButton" icon="fas fa-home" class="ml-3" data-tippy-content="Hello, world!"></v-btn>
       </v-col>
     </v-row>
@@ -34,6 +37,9 @@
 import tippy from 'tippy.js';
 export default {
   name: "Topbar",
+  data: () => ({
+    token: localStorage.getItem('token')
+  }),
   methods: {
     
   },

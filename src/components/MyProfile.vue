@@ -61,12 +61,26 @@
       <v-col>
         <p>Details</p>
         <v-form ref="form" @submit.prevent="handleUpdateProfil" method="post" v-model="valid">
-          <li v-for="item in items" :key="item.category">
-            <v-row>
+          <li v-for="item in items" :key="item.category" style="list-style: none">
+
+            <v-row v-if="(item.category == items[2].category) || (item.category == items[4].category)">
+            <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
+            <v-col class="my-auto"><p class="text-xs-center">{{ item.value}} </p></v-col>
+            </v-row>
+            <v-row v-else-if="item.category == items[5].category">
+            <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
+            <v-col class="my-auto"><v-select v-model="items[5].value" :items="sports" filled label="Sport"></v-select></v-col>
+            </v-row>
+            <v-row v-else-if="item.category == items[11].category">
+            <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
+            <v-col class="my-auto"><v-row><v-text-field style="background-color : white" v-model="country" :value="country" class="text-xs-center" label="country"></v-text-field><v-text-field style="background-color : white" v-model="city" :value="city" class="text-xs-center" label="city"></v-text-field></v-row></v-col>
+            </v-row>
+            <v-row v-else>
             <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
             <v-col class="my-auto"><v-text-field style="background-color : white" v-model="item.value" :value="item.value" class="text-xs-center"></v-text-field></v-col>
             </v-row>
           </li>
+
           <v-btn type="submit">
             Validate changes
           </v-btn>
@@ -195,12 +209,14 @@ import { reactive} from 'vue';
 import axios from 'axios';
 import { server } from '../helper';
 import tippy from 'tippy.js';
+// import { response } from 'express';
 
 
   export default {
     name: "Profile",
     mounted() {
     tippy('[data-tippy-content]');
+
   },
 
     beforeMount() {
@@ -233,22 +249,79 @@ import tippy from 'tippy.js';
 
         })
         .catch(error => {
-            // handle error
             console.log(error)
           })
-      axios.get(server.baseURLDev+'sports/userSport', {
-        email : this.items[2].value
-       })
+      
+      axios.get(server.baseURLDev+'sports')
+      .then(response => {
+        console.log("AAAALLLL spooooort")
+        console.log(response)
+        var arraytoreturn = [];
+        response.data.forEach(element => {
+          arraytoreturn.push(element.name) 
+        });
+        this.sports = arraytoreturn
+        console.log(this.sports)
+      })
+      .catch(error => {
+            console.log(error)
+          })
+      axios.get(server.baseURLDev+'sports/userSport?email='+localStorage.getItem('email'))
        .then(response => {
         console.log("spooooort")
         console.log(response)
+        this.items[5].value = response.data[0].name
        })
        .catch(error => {
-            // handle error
             console.log(error)
           })
+      axios.get(server.baseURLDev+'auth/getRole?email_user='+localStorage.getItem('email'))
+      .then(response => {
+        console.log("rooole")
+        console.log(response)
+        this.items[4].value = response.data
+      })
+      .catch(error => {
+            console.log(error)
+          })
+      axios.get(server.baseURLDev+'users/adresses?email='+localStorage.getItem('email'))
+      .then(response => {
+        console.log("adresse")
+        console.log(response)
+        this.country = response.data[0].country
+        this.city = response.data[0].city
+        if (this.country != undefined) {
+          if(this.city != undefined) {
+            this.items[11].value = this.country + " " + this.city
+          } else {
+            this.items[11].value = this.country
+          }
+         
+        } else {
+          if (this.city != undefined) {
+            this.items[11].value = this.city
+          }
+        }
+      })
+      .catch(error => {
+            console.log(error)
+          })
+      axios.get(server.baseURLDev+'users/userClub?email_user='+localStorage.getItem('email'))
+      .then(response => {
+        console.log("Cluuuub")
+        console.log(response)
+        this.items[10].value = response.data[0].name
+      })
+      .catch(error => {
+            console.log(error)
+          })
+
     },
+
     data: () => ({
+        country : "",
+        city: "",
+        sports: ["Football", "Basketball", "Volley"],
         description: "No description yet",
         edit: false,
         headers: [
@@ -272,6 +345,13 @@ import tippy from 'tippy.js';
     }),
 
     methods: {
+      sportArrayToNameSportArray(array){
+        var arraytoreturn = [];
+        array.forEach(element => {
+          arraytoreturn.push(element.name) 
+        });
+        return arraytoreturn;
+      },
       handleEdit(){
         this.edit = !this.edit;
       },
@@ -303,6 +383,34 @@ import tippy from 'tippy.js';
             // handle error
             console.log(error)
           });
+
+        axios.put(server.baseURLDev+'sports/addSport', {
+          name : this.items[5].value,
+          email : localStorage.getItem("email"),
+        })
+        .then((response) => {
+          console.log("add sport");
+          console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error)
+          });
+
+        axios.post(server.baseURLDev+'adresses/create', {
+          country :  this.country,
+          city : this.city,
+          street: "",
+          number: 0,
+          email: localStorage.getItem("email"),
+        })
+        .then((response) => {
+          console.log("add adresse");
+          console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error)
+          });
+
       }
 
 
