@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     redirectToProfileClub(id) {
-      this.$router.push({ path: "/club/" + id });
+      this.$router.push({ path: "/clubs/" + id });
     },
   },
 };

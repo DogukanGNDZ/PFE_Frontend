@@ -10,7 +10,7 @@
         sm="6"
         md="4"
       >
-        <v-card class="playerCard">
+        <v-card class="playerCard" @click="redirectToProfilePlayer(player.id)">
           <!-- ROW -->
           <v-row>
             <v-col cols="12">
@@ -74,6 +74,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    redirectToProfilePlayer(id) {
+      this.$router.push({ path: "/players/" + id });
+    },
   },
 };
 </script>

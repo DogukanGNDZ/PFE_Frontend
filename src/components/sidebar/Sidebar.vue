@@ -5,12 +5,10 @@ import { collapsed, toggleSidebar, sidebarWidth } from "./state";
 export default {
   props: {},
   data: () => ({
-    token: localStorage.getItem('token')
+    token: localStorage.getItem("token"),
   }),
-  methods: {
-      
-  },
-  
+  methods: {},
+
   components: { SidebarLink },
   setup() {
     return { collapsed, toggleSidebar, sidebarWidth };
@@ -26,27 +24,25 @@ export default {
       </span>
       <span v-else>Recruit</span>
     </h1>
-    <div v-if="token!==null">
-
-    <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
-    <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-    <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
-    <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
-    <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
-    <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
-    <SidebarLink to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
+    <div v-if="token !== null">
+      <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
+      <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
+      <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
+      <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
+      <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
+      <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
+      <SidebarLink to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
     </div>
-    <div v-else>    
-    <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
-    <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-    <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
-    <SidebarLink to="/login" icon="fa-solid fa-user">Login</SidebarLink>
-    <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
-    <SidebarLink to="/teams" icon="fas fa-users">Clubs</SidebarLink>
-    <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
-    <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
+    <div v-else>
+      <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
+      <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
+      <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
+      <SidebarLink to="/login" icon="fa-solid fa-user">Login</SidebarLink>
+      <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
+      <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
+      <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
+      <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
     </div>
-
 
     <span
       class="collapse-icon"

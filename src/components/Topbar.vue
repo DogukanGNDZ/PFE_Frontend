@@ -25,7 +25,7 @@
         <!-- Icon to know the role of user-->
         <div style="display: inline-block">
           <div v-if="role == null"></div>
-          <div v-else-if="role == 'coach'">
+          <div v-else-if="role === 'coach'">
             <v-btn
               id="myButton"
               icon="fas fa-home"
@@ -33,7 +33,7 @@
               data-tippy-content="Connected as coach"
             ></v-btn>
           </div>
-          <div v-else-if="role == 'player'">
+          <div v-else-if="role === 'player'">
             <v-btn
               id="myButton"
               icon="fas fa-columns"

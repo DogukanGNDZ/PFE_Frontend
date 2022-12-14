@@ -4,7 +4,7 @@ import About from "@/views/About.vue";
 import Register from "@/views/RegisterView.vue";
 import Role from "@/views/ChoseRoleView.vue";
 import Dashboard from "@/views/Dashboard.vue";
-import Teams from "@/views/Teams.vue";
+import Clubs from "@/views/Teams.vue";
 import Players from "@/views/Players.vue";
 import Coachs from "@/views/Coachs.vue";
 import ProfileClub from "@/views/ProfileClub.vue";
@@ -12,6 +12,7 @@ import Login from "@/views/LoginView.vue";
 import Profil from "@/views/ProfilView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
 import Logout from "@/components/Logout.vue";
+import ProfilePlayer from "@/views/ProfilePlayer.vue";
 import axios from "axios";
 import { server } from "../helper";
 
@@ -48,9 +49,9 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/teams",
+    path: "/clubs",
     name: "Teams",
-    component: Teams,
+    component: Clubs,
   },
   {
     path: "/register",
@@ -92,7 +93,8 @@ const routes = [
     name: "Coachs",
     component: Coachs,
   },
-  { path: "/club/:id", component: ProfileClub },
+  { path: "/clubs/:id", component: ProfileClub },
+  { path: "/players/:id", component: ProfilePlayer },
 ];
 
 const router = createRouter({
