@@ -10,8 +10,10 @@ import Coachs from "@/views/Coachs.vue";
 import ProfileClub from "@/views/ProfileClub.vue";
 import Login from "@/views/LoginView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
+import Notification from "@/views/NotificationView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
+import MyClub from "@/views/MyClub.vue";
 import axios from "axios";
 import { server } from "../helper";
 
@@ -73,6 +75,11 @@ const routes = [
     component: MyProfil,
   },
   {
+    path: "/notification",
+    name: "Notifications",
+    component: Notification,
+  },
+  {
     path: "/logout",
     name: "Log out",
     component: Logout,
@@ -89,6 +96,11 @@ const routes = [
   },
   { path: "/clubs/:id", component: ProfileClub },
   { path: "/players/:id", component: ProfilePlayer },
+  {
+    path: "/myClub",
+    name: "My Club",
+    component: MyClub,
+  },
 ];
 
 const router = createRouter({

@@ -162,6 +162,7 @@ export default {
         })
         .then((response) => {
           // handle success
+          this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {
@@ -181,6 +182,7 @@ export default {
         })
         .then((response) => {
           // handle success
+        this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {
@@ -198,6 +200,7 @@ export default {
         })
         .then((response) => {
           // handle success
+          this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {

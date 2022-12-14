@@ -14,15 +14,41 @@
         ></v-text-field>
       </v-col>
 
-      <v-col cols="4" class="text-right">
+      <!-- <v-col cols="4" class="text-right">
+        <div style="display: inline-block">
+        <div v-if="role == null"></div>
+        <div v-else-if="role === 'player'">
+          <v-btn
+            icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myprofil"
+            data-tippy-content="My profile"
+          ></v-btn>
+        </div>
+        <div v-else-if="role === 'coach'">
+          <v-btn icon="fa-solid fa-user"
+            class="ml-3"
+            to="/mycoach"
+            data-tippy-content="My Coach"
+          ></v-btn>
+        </div>
+        <div v-else><v-btn
+            icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myClub"
+            data-tippy-content="My Club"
+          ></v-btn>
+        </div>
+        <div style="display: inline-block">
         <v-btn
-          icon="fa-solid fa-user"
+          icon="fa-solid fa-bell"
           class="ml-3"
-          to="/myprofil"
-          data-tippy-content="My profile"
+          to="/notification"
+          data-tippy-content="Notifications"
         ></v-btn>
+      </div>
+      </div>
 
-        <!-- Icon to know the role of user-->
         <div style="display: inline-block">
           <div v-if="role == null"></div>
           <div v-else-if="role === 'coach'">
@@ -50,6 +76,67 @@
             ></v-btn>
           </div>
         </div>
+      </v-col> -->
+      <v-col cols="4" class="text-right" v-if="role === 'player'">
+        <div>
+        <v-btn
+            icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myprofil"
+            data-tippy-content="My profile"
+          ></v-btn>
+          <v-btn
+          icon="fa-solid fa-bell"
+          class="ml-3"
+          to="/notification"
+          data-tippy-content="Notifications"
+        ></v-btn>
+        <v-btn
+              id="myButton"
+              icon="fas fa-columns"
+              class="ml-3"
+              data-tippy-content="Connected as player"
+            ></v-btn></div>
+      </v-col>
+      <v-col cols="4" class="text-right" v-if="role === 'coach'">
+        <div>
+        <v-btn icon="fa-solid fa-user"
+            class="ml-3"
+            to="/mycoach"
+            data-tippy-content="My Coach"
+          ></v-btn>
+          <v-btn
+          icon="fa-solid fa-bell"
+          class="ml-3"
+          to="/notification"
+          data-tippy-content="Notifications"
+        ></v-btn>
+        <v-btn
+              id="myButton"
+              icon="fas fa-home"
+              class="ml-3"
+              data-tippy-content="Connected as coach"
+            ></v-btn></div>
+      </v-col>
+      <v-col cols="4" class="text-right" v-if="role === 'club'">
+        <div>
+        <v-btn icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myclub"
+            data-tippy-content="My CLubh"
+          ></v-btn>
+          <v-btn
+          icon="fa-solid fa-bell"
+          class="ml-3"
+          to="/notification"
+          data-tippy-content="Notifications"
+        ></v-btn>
+        <v-btn
+              id="myButton"
+              icon="fas fa-home"
+              class="ml-3"
+              data-tippy-content="Connected as club"
+            ></v-btn></div>
       </v-col>
     </v-row>
   </v-container>
