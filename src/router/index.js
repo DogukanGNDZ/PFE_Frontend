@@ -10,6 +10,7 @@ import Coachs from "@/views/Coachs.vue";
 import ProfileClub from "@/views/ProfileClub.vue";
 import Login from "@/views/LoginView.vue";
 import MyProfil from "@/views/MyProfilView.vue";
+import Notification from "@/views/NotificationView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
 import axios from "axios";
@@ -71,6 +72,11 @@ const routes = [
     path: "/myprofil",
     name: "My Profil",
     component: MyProfil,
+  },
+  {
+    path: "/notification",
+    name: "Notifications",
+    component: Notification,
   },
   {
     path: "/logout",

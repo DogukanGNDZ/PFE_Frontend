@@ -56,18 +56,21 @@
     </v-col>
     <v-col>
       <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
-      <div>
+      <!-- <div>
         <input type="file" @change="onFileChange">
+        <img v-if="imageUrl" :src="imageUrl" />
         <v-btn @click="uploadImage">Upload Image</v-btn>
-      </div>
+      </div> -->
     </v-col>
+    <v-form ref="form" @submit.prevent="handleUpdateProfil" method="post" v-model="valid">
     <v-row>
+    
       <v-col>
         <p>Details</p>
-        <v-form ref="form" @submit.prevent="handleUpdateProfil" method="post" v-model="valid">
+        
           <li v-for="item in items" :key="item.category" style="list-style: none">
 
-            <v-row v-if="(item.category == items[2].category) || (item.category == items[4].category)">
+            <v-row v-if="(item.category == items[2].category) || (item.category == items[4].category) || (item.category == items[10].category)">
             <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
             <v-col class="my-auto"><p class="text-xs-center">{{ item.value}} </p></v-col>
             </v-row>
@@ -81,22 +84,29 @@
             </v-row>
             <v-row v-else>
             <v-col class="my-auto"><p class="text-xs-center">{{ item.category}} :</p></v-col>
-            <v-col class="my-auto"><v-text-field style="background-color : white" v-model="item.value" :value="item.value" class="text-xs-center"></v-text-field></v-col>
+            <v-col class="my-auto"><input  type="text" style="background-color : red"  :value="item.value" class="text-xs-center"/></v-col>
+            <!-- v-model="item.value" -->
             </v-row>
           </li>
 
-          <v-btn type="submit">
-            Validate changes
-          </v-btn>
-        </v-form>
+
+        
         
 
       </v-col>
       <v-col>
         <p>About Me</p>
-        
+        <v-text-field style="background-color : white" v-model="description" :value="description" class="text-xs-center"></v-text-field>
+        <div>
+        <input type="file" @change="onFileChange">
+        <v-btn @click="uploadImage">Upload Image</v-btn>
+      </div>
       </v-col>
-    </v-row>
+    </v-row>     
+          <v-btn type="submit">
+            Validate changes
+          </v-btn>
+    </v-form>
   </v-container>
   <!-- <v-card class="mx-auto" max-width="434" tile>
           <v-img height="100%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
@@ -446,6 +456,9 @@ import tippy from 'tippy.js';
         .catch(error => {
             console.log(error)
           });
+        
+        
+        // location.reload()
 
       }
 

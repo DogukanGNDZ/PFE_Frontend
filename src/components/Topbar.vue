@@ -24,6 +24,12 @@
             to="/myprofil"
             data-tippy-content="My profile"
           ></v-btn>
+        <v-btn
+          icon="fa-solid fa-bell"
+          class="ml-3"
+          to="/notification"
+          data-tippy-content="Notifications"
+        ></v-btn>
         </div>
         <div v-else-if="role === 'coach'">
           <v-btn icon="fa-solid fa-user"
