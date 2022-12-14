@@ -13,12 +13,43 @@
           single-line
         ></v-text-field>
       </v-col>
-      <v-col cols="4" class="text-right" v-if="token!==null">
-        <v-btn icon="fa-solid fa-user" class="ml-3" to="/myprofil" data-tippy-content="My profile"></v-btn>
-        <v-btn id="myButton" icon="fas fa-home" class="ml-3" data-tippy-content="Hello, world!"></v-btn>
-      </v-col>
-      <v-col cols="4" class="text-right" v-else>
-        <v-btn id="myButton" icon="fas fa-home" class="ml-3" data-tippy-content="Hello, world!"></v-btn>
+
+      <v-col cols="4" class="text-right">
+        <v-btn
+          icon="fa-solid fa-user"
+          class="ml-3"
+          to="/profil"
+          data-tippy-content="My profile"
+        ></v-btn>
+
+        <!-- Icon to know the role of user-->
+        <div style="display: inline-block">
+          <div v-if="role == null"></div>
+          <div v-else-if="role === 'coach'">
+            <v-btn
+              id="myButton"
+              icon="fas fa-home"
+              class="ml-3"
+              data-tippy-content="Connected as coach"
+            ></v-btn>
+          </div>
+          <div v-else-if="role === 'player'">
+            <v-btn
+              id="myButton"
+              icon="fas fa-columns"
+              class="ml-3"
+              data-tippy-content="Connected as player"
+            ></v-btn>
+          </div>
+          <div v-else>
+            <v-btn
+              id="myButton"
+              icon="fas fa-users"
+              class="ml-3"
+              data-tippy-content="Connected as club"
+            ></v-btn>
+          </div>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -34,20 +65,31 @@
 </template>
 
 <script>
-import tippy from 'tippy.js';
+import { server } from "../helper";
+import axios from "axios";
+import tippy from "tippy.js";
+
 export default {
   name: "Topbar",
   data: () => ({
-    token: localStorage.getItem('token')
+    role: null,
   }),
-  methods: {
-    
-  },
+  methods: {},
   mounted() {
-    tippy('[data-tippy-content]');
+    let email = localStorage.getItem("email");
+    console.log(email);
+    if (email !== null) {
+      console.log("email != null :");
+      axios
+        .get(server.baseURLDev + "auth/getRole?email_user=" + email)
+        .then((response) => (this.role = response.data))
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    tippy("[data-tippy-content]");
   },
 };
-
 </script>
 
 <style>
