@@ -59,7 +59,7 @@ export default {
   name: "ProfileClub",
   data() {
     return {
-      urlImage: null,
+      imageUrl: null,
       infoClub: [],
       teams: [],
       listPlayer: [[]],
@@ -73,10 +73,10 @@ export default {
       .then((response) => {
         this.infoClub = response.data;
         this.emailClub = response.data.email;
-        this.urlImage =
+        this.imageUrl =
           `https://pfeimages.blob.core.windows.net/imagess/` +
           response.data.picture;
-        console.log(this.urlImage);
+        console.log(this.imageUrl);
       })
       .catch((error) => {
         console.log(error);
