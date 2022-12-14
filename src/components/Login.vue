@@ -1,31 +1,30 @@
 <template>
   
     <v-container class="login-page">
-        <v-card>
-            <v-card-title>
-              Login
-            <v-card-text>
-      <v-form ref="form" @submit.prevent="handleLogin"  method="post" v-model="valid" >
-        <v-text-field
-          v-model="email"
-          :rules="emailRules"
-          label="E-mail"
-        ></v-text-field>
-        <v-text-field
-          v-model="password"
-          :rules="passwordRules"
-          :type="show ? 'text' : 'password'"
-          :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
-          @click:append="() => (show = !show)"
-          label="Password"
-        ></v-text-field>
-        <v-btn type="submit" :disabled="!valid">
-          Log in
-        </v-btn>
-      </v-form>
-    
-    </v-card-text>
-    </v-card-title>
+      <v-card>
+        <v-card-title>
+          Login
+        </v-card-title>
+        <v-card-text>
+          <v-form ref="form" @submit.prevent="handleLogin"  method="post" v-model="valid" >
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="E-mail"
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              :type="show ? 'text' : 'password'"
+              :append-icon="show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+              @click:append="() => (show = !show)"
+              label="Password"
+            ></v-text-field>
+            <v-btn type="submit" :disabled="!valid">
+              Log in
+            </v-btn>
+          </v-form>
+        </v-card-text>
     </v-card>
   </v-container>
 </template>

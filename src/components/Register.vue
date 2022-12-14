@@ -3,118 +3,118 @@
     <v-card>
       <v-card-title>
         Registration
-        <v-card-text>
-          <v-form
-            ref="form"
-            @submit.prevent="handleRegister"
-            method="post"
-            v-model="valid"
-            v-if="role == 'player'"
-          >
-            <v-text-field
-              v-model="user.name"
-              :counter="10"
-              :rules="nameRules"
-              label="Lastname"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.firstname"
-              :counter="10"
-              :rules="firstNameRules"
-              label="Firstname"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.email"
-              :rules="emailRules"
-              label="E-mail"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.password"
-              :rules="passwordRules"
-              :type="show ? 'text' : 'password'"
-              :append-icon="
-                show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
-              "
-              @click:append="() => (show = !show)"
-              label="Password"
-              hint="At least 8 characters"
-            ></v-text-field>
-            <p v-if="errora" class="error" style="color: red">{{ errora }}</p>
-            <br />
-            <v-btn type="submit" :disabled="!valid"> Register </v-btn>
-          </v-form>
-          <v-form
-            ref="form"
-            @submit.prevent="handleRegisterCoach"
-            method="post"
-            v-model="valid"
-            v-else-if="role == 'coach'"
-          >
-            <v-text-field
-              v-model="user.name"
-              :counter="10"
-              :rules="nameRules"
-              label="Lastname"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.firstname"
-              :counter="10"
-              :rules="firstNameRules"
-              label="Firstname"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.email"
-              :rules="emailRules"
-              label="E-mail"
-            ></v-text-field>
-            <v-text-field
-              v-model="user.password"
-              :rules="passwordRules"
-              :type="show ? 'text' : 'password'"
-              :append-icon="
-                show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
-              "
-              @click:append="() => (show = !show)"
-              label="Password"
-              hint="At least 8 characters"
-            ></v-text-field>
-            <p v-if="errora" class="error">{{ errora }}</p>
-            <v-btn type="submit" :disabled="!valid"> Register </v-btn>
-          </v-form>
-          <v-form
-            ref="form"
-            @submit.prevent="handleRegisterClub"
-            method="post"
-            v-model="valid"
-            v-else
-          >
-            <v-text-field
-              v-model="club.name"
-              :counter="10"
-              :rules="nameRules"
-              label="Name of the club"
-            ></v-text-field>
-            <v-text-field
-              v-model="club.email"
-              :rules="emailRules"
-              label="E-mail"
-            ></v-text-field>
-            <v-text-field
-              v-model="club.password"
-              :rules="passwordRules"
-              :type="show ? 'text' : 'password'"
-              :append-icon="
-                show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
-              "
-              @click:append="() => (show = !show)"
-              label="Password"
-              hint="At least 8 characters"
-            ></v-text-field>
-            <p v-if="errora" class="error">{{ errora }}</p>
-            <v-btn type="submit" :disabled="!valid"> Register </v-btn>
-          </v-form>
-        </v-card-text>
       </v-card-title>
+      <v-card-text>
+        <v-form
+          ref="form"
+          @submit.prevent="handleRegister"
+          method="post"
+          v-model="valid"
+          v-if="role == 'player'"
+        >
+          <v-text-field
+            v-model="user.name"
+            :counter="10"
+            :rules="nameRules"
+            label="Lastname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.firstname"
+            :counter="10"
+            :rules="firstNameRules"
+            label="Firstname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.email"
+            :rules="emailRules"
+            label="E-mail"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.password"
+            :rules="passwordRules"
+            :type="show ? 'text' : 'password'"
+            :append-icon="
+              show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
+            "
+            @click:append="() => (show = !show)"
+            label="Password"
+            hint="At least 8 characters"
+          ></v-text-field>
+          <p v-if="errora" class="error" style="color: red">{{ errora }}</p>
+          <br />
+          <v-btn type="submit" :disabled="!valid"> Register </v-btn>
+        </v-form>
+        <v-form
+          ref="form"
+          @submit.prevent="handleRegisterCoach"
+          method="post"
+          v-model="valid"
+          v-else-if="role == 'coach'"
+        >
+          <v-text-field
+            v-model="user.name"
+            :counter="10"
+            :rules="nameRules"
+            label="Lastname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.firstname"
+            :counter="10"
+            :rules="firstNameRules"
+            label="Firstname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.email"
+            :rules="emailRules"
+            label="E-mail"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.password"
+            :rules="passwordRules"
+            :type="show ? 'text' : 'password'"
+            :append-icon="
+              show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
+            "
+            @click:append="() => (show = !show)"
+            label="Password"
+            hint="At least 8 characters"
+          ></v-text-field>
+          <p v-if="errora" class="error">{{ errora }}</p>
+          <v-btn type="submit" :disabled="!valid"> Register </v-btn>
+        </v-form>
+        <v-form
+          ref="form"
+          @submit.prevent="handleRegisterClub"
+          method="post"
+          v-model="valid"
+          v-else
+        >
+          <v-text-field
+            v-model="club.name"
+            :counter="10"
+            :rules="nameRules"
+            label="Name of the club"
+          ></v-text-field>
+          <v-text-field
+            v-model="club.email"
+            :rules="emailRules"
+            label="E-mail"
+          ></v-text-field>
+          <v-text-field
+            v-model="club.password"
+            :rules="passwordRules"
+            :type="show ? 'text' : 'password'"
+            :append-icon="
+              show ? 'fa-sharp fa-solid fa-eye-slash' : 'fa-solid fa-eye'
+            "
+            @click:append="() => (show = !show)"
+            label="Password"
+            hint="At least 8 characters"
+          ></v-text-field>
+          <p v-if="errora" class="error">{{ errora }}</p>
+          <v-btn type="submit" :disabled="!valid"> Register </v-btn>
+        </v-form>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>

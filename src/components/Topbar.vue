@@ -8,7 +8,6 @@
           label="Search"
           placeholder="Search"
           filled
-          rounded
           dense
           single-line
         ></v-text-field>

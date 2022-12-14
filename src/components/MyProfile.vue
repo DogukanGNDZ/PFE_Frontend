@@ -22,10 +22,10 @@
             <v-col>
               <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
             </v-col>
-            <v-list-item color="rgba(0, 0, 0, .4)">
+            <v-list-item>  <!-- color="rgba(0, 0, 0, .4)" -->
               <v-list-item-content>
-                <v-list-item-title class="title">Jerome Devaux</v-list-item-title>
-                <v-list-item-subtitle>Football Player</v-list-item-subtitle>
+                <v-list-item class="title">{{this.items[0].value}} {{this.items[1].value}}</v-list-item>
+                <v-list-item>{{this.items[5].value}} Player</v-list-item>
               </v-list-item-content>
             </v-list-item>
             <v-row>
@@ -39,7 +39,7 @@
                                 theme-color="#1d90ff"
                                 table-class-name="customize-table"
                                 hide-footer
-                                alternating
+                                hide-header
                                 no-hover
                                 />
                         </v-card-text>
@@ -622,20 +622,22 @@ export default {
   background-color: gray;
 }
 
-.customize-table {
-  --easy-table-border: 1px solid #445269;
-  --easy-table-row-border: 1px solid #445269;
+ .customize-table {
+  /* --easy-table-border: 1px solid #445269; */
+  /* --easy-table-row-border: 1px solid #445269; */
   background: linear-gradient(#0e0d0d, #2e2e2e);
-  --easy-table-header-font-size: 14px;
+  /* --easy-table-header-font-size: 14px;
   --easy-table-header-height: 30px;
   --easy-table-header-font-color: #c1cad4;
-  --easy-table-header-background-color: #2d3a4f;
+  --easy-table-header-background-color: #2d3a4f; */
 
-  --easy-table-body-even-row-font-color: #fff;
-  --easy-table-body-even-row-background-color: #000000;
+  --easy-table-header-font-size: 0px;
+  --easy-table-header-height: 0px;
+  --easy-table-header-font-color: #c1cad400;
+  --easy-table-header-background-color: #2d3a4f00;
 
-  --easy-table-body-row-font-color: #c0c7d2;
-  --easy-table-body-row-background-color: ;
+  --easy-table-body-row-font-color: black;
+  --easy-table-body-row-background-color: white;
   --easy-table-body-row-height: 50px;
   --easy-table-body-row-font-size: 14px;
 
