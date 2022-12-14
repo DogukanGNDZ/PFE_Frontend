@@ -15,7 +15,10 @@
           <v-row>
             <v-col cols="12">
               <v-img
-                :src="'https://pfeimages.blob.core.windows.net/imagess/' + coach.picture "
+                :src="
+                  'https://pfeimages.blob.core.windows.net/imagess/' +
+                  coach.picture
+                "
                 class="rounded-circle float-left"
                 width="30px"
                 alt=""
@@ -41,12 +44,10 @@
           <div class="lineBetween"></div>
           <v-row class="my-3">
             <v-col cols="6" style="border-right: solid 1px #eb6969">
-              Nationality <br />
               Nb experience <br />
               Club
             </v-col>
             <v-col cols="6">
-              French <br />
               5 years <br />
               RSCA
             </v-col>
