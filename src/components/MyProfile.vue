@@ -449,6 +449,8 @@ export default {
         imageName:'',
         imageUrl: null,
         imageData: null,
+        imageUrlB: null,
+        imageDataB: null,
         country : "",
         city: "",
         sports: ["Football", "Basketball", "Volley"],
@@ -504,6 +506,36 @@ export default {
           console.log(error);
         });
     },
+    onFileChangeB(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageUrlB = e.target.result;
+        this.imageDataB = file;
+      };
+      reader.readAsDataURL(file);
+    },
+    uploadImageB() {
+      const formData = new FormData();
+      formData.append("image", this.imageDataB);
+
+      axios
+        .post(server.baseURLDev + "users/uploadImageBanner", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorize: localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          // Handle the response from the server
+          console.log(response);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error);
+        });
+    },
+
       sportArrayToNameSportArray(array){
         var arraytoreturn = [];
         array.forEach(element => {
