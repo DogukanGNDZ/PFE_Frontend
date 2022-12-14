@@ -78,64 +78,70 @@
       </v-col> -->
       <v-col cols="4" class="text-right" v-if="role === 'player'">
         <div>
-        <v-btn
+          <v-btn
             icon="fa-solid fa-user"
             class="ml-3"
             to="/myprofil"
             data-tippy-content="My profile"
           ></v-btn>
           <v-btn
-          icon="fa-solid fa-bell"
-          class="ml-3"
-          to="/notification"
-          data-tippy-content="Notifications"
-        ></v-btn>
-        <v-btn
-              id="myButton"
-              icon="fas fa-columns"
-              class="ml-3"
-              data-tippy-content="Connected as player"
-            ></v-btn></div>
+            icon="fa-solid fa-bell"
+            class="ml-3"
+            to="/notification"
+            data-tippy-content="Notifications"
+          ></v-btn>
+          <v-btn
+            id="myButton"
+            icon="fas fa-columns"
+            class="ml-3"
+            data-tippy-content="Connected as player"
+          ></v-btn>
+        </div>
       </v-col>
       <v-col cols="4" class="text-right" v-if="role === 'coach'">
         <div>
-        <v-btn icon="fa-solid fa-user"
+          <v-btn
+            icon="fa-solid fa-user"
             class="ml-3"
             to="/mycoach"
             data-tippy-content="My Coach"
           ></v-btn>
           <v-btn
-          icon="fa-solid fa-bell"
-          class="ml-3"
-          to="/notification"
-          data-tippy-content="Notifications"
-        ></v-btn>
-        <v-btn
-              id="myButton"
-              icon="fas fa-home"
-              class="ml-3"
-              data-tippy-content="Connected as coach"
-            ></v-btn></div>
+            icon="fa-solid fa-bell"
+            class="ml-3"
+            to="/notification"
+            data-tippy-content="Notifications"
+          ></v-btn>
+          <v-btn
+            id="myButton"
+            icon="fas fa-home"
+            class="ml-3"
+            data-tippy-content="Connected as coach"
+          ></v-btn>
+        </div>
       </v-col>
       <v-col cols="4" class="text-right" v-if="role === 'club'">
         <div>
-        <v-btn icon="fa-solid fa-user"
+          <v-btn
+            icon="fa-solid fa-user"
             class="ml-3"
             to="/myclub"
             data-tippy-content="My CLubh"
           ></v-btn>
           <v-btn
-          icon="fa-solid fa-bell"
-          class="ml-3"
-          to="/notification"
-          data-tippy-content="Notifications"
-        ></v-btn>
-        <v-btn
-              id="myButton"
-              icon="fas fa-home"
-              class="ml-3"
-              data-tippy-content="Connected as club"
-            ></v-btn></div>
+            icon="fa-solid fa-bell"
+            class="ml-3"
+            to="/notification"
+            data-tippy-content="Notifications"
+          ></v-btn>
+          <v-btn
+            id="myButton"
+            icon="fas fa-home"
+            class="ml-3"
+            to="/newMember"
+            data-tippy-content="Connected as club"
+          ></v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -164,7 +170,6 @@ export default {
   mounted() {
     let email = localStorage.getItem("email");
     if (email !== null) {
-      console.log("email != null :");
       axios
         .get(server.baseURLDev + "auth/getRole?email_user=" + email)
         .then((response) => (this.role = response.data))

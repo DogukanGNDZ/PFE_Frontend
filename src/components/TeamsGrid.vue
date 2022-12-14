@@ -13,7 +13,13 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="2">
-              <v-img :src="'https://pfeimages.blob.core.windows.net/imagess/' + club.picture " class="imgTeams"></v-img>
+              <v-img
+                :src="
+                  'https://pfeimages.blob.core.windows.net/imagess/' +
+                  club.picture
+                "
+                class="imgTeams"
+              ></v-img>
             </v-col>
             <v-col cols="9 text-left">
               <h2>{{ club.name }}</h2>
@@ -42,18 +48,33 @@ export default {
   data() {
     return {
       clubs: [],
+      listClubs: [[]],
     };
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get(server.baseURLDev + "clubs")
       .then((response) => {
         this.clubs = response.data;
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    this.clubs.filter((value, index) => {
+      console.log(index);
+      console.log(value.email);
+
+      axios
+        .get(server.baseURLDev + "sports/userSport?email=" + value.email)
+        .then((response) => {
+          this.listClubs[index] = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(this.listClubs);
+    });
   },
   methods: {
     redirectToProfileClub(id) {

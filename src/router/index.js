@@ -15,6 +15,7 @@ import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
 import MyClub from "@/views/MyClub.vue";
 import MyCoach from "@/views/MyCoachView.vue";
+import NewMember from "@/views/NewMember.vue";
 import axios from "axios";
 import { server } from "../helper";
 
@@ -106,6 +107,11 @@ const routes = [
     path: "/mycoach",
     name: "My Coach",
     component: MyCoach,
+  },
+  {
+    path: "/newMember",
+    name: "NewMember",
+    component: NewMember,
   },
 ];
 

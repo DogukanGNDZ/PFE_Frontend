@@ -5,11 +5,11 @@
         <v-col cols="12">
           <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
           <h2>{{ infoClub.name }}</h2>
-          <div class="my-3">
+          <!-- <div class="my-3">
             <v-btn class="ma-2" outlined rounded color="success">
               Demande d'inscription
             </v-btn>
-          </div>
+          </div> -->
         </v-col>
       </v-row>
       <v-row>
@@ -31,6 +31,7 @@
         <v-col v-for="(team, i) in this.teams" :key="i" cols="12">
           <v-card class="pa-3">
             <h3 class="text-left">{{ team.category }}</h3>
+
             <v-card-text class="text-left">
               <p>Number of players : {{ team.number_players }}</p>
               <p>Players :</p>
@@ -43,6 +44,17 @@
               >
                 {{ player.firstname }} {{ player.lastname }}
               </v-col>
+              <v-btn
+                v-if="roleUsr !== null && roleUsr !== 'club'"
+                class="ma-2"
+                style="float: right"
+                outlined
+                rounded
+                color="indigo"
+                @click="sendDemandRegisterToAClub(emailUsr, team.id)"
+              >
+                Demande d'inscription
+              </v-btn>
             </v-row>
           </v-card>
         </v-col>
@@ -64,10 +76,29 @@ export default {
       teams: [],
       listPlayer: [[]],
       emailClub: null,
+      emailUsr: null,
+      roleUsr: null,
     };
   },
   async mounted() {
+    //Get the email of the user connected
+    const email = localStorage.getItem("email");
+    this.emailUsr = email;
+
+    if (email !== null) {
+      //Get the role of the user connected
+      await axios
+        .get(server.baseURLDev + "auth/getRole?email_user=" + email)
+        .then((response) => (this.roleUsr = response.data))
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    //Get the id of the club
     const id = this.$route.params.id;
+
+    //Get information about the club
     await axios
       .get(server.baseURLDev + "users/id/" + id)
       .then((response) => {
@@ -81,6 +112,7 @@ export default {
         console.log(error);
       });
 
+    // Get the list of all teams of the club
     await axios
       .get(server.baseURLDev + "clubs/getTeamsClub?email=" + this.emailClub)
       .then((response) => {
@@ -90,10 +122,8 @@ export default {
         console.log(error);
       });
 
+    //Get the list of players for each team
     this.teams.filter((value, index) => {
-      console.log("Value id : " + value.id);
-      console.log("Index " + index);
-
       axios
         .get(server.baseURLDev + "teams/teamsPlayer?id_team=" + value.id)
         .then((response) => {
@@ -102,10 +132,27 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-      console.log(this.listPlayer);
     });
   },
 
-  methods: {},
+  methods: {
+    sendDemandRegisterToAClub(emailUsr, teamId) {
+      console.log(emailUsr);
+      console.log(teamId);
+      axios
+        .post(server.baseURLDev + "users/applyClub", {
+          email_user: emailUsr,
+          id_team: teamId,
+        })
+        .then((response) => {
+          // handle success
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+  },
 };
 </script>

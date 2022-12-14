@@ -1,16 +1,18 @@
 <template>
   <section>
-    <div>Test {{ this.$route.params.id }}</div>
     <v-container>
       <v-row>
         <v-col cols="12">
-          
-          <v-div v-if="imageUrl!==`https://pfeimages.blob.core.windows.net/imagess/`">
-              <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
-            </v-div>
-            <v-div v-else>
-              <v-img class="imgTeams" src="../assets/dunking.png"></v-img>
-            </v-div>
+          <v-div
+            v-if="
+              imageUrl !== `https://pfeimages.blob.core.windows.net/imagess/`
+            "
+          >
+            <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
+          </v-div>
+          <v-div v-else>
+            <v-img class="imgTeams" src="../assets/dunking.png"></v-img>
+          </v-div>
 
           <h2>{{ infoPlayer.firstname }} {{ infoPlayer.lastname }}</h2>
           <div class="my-3">
