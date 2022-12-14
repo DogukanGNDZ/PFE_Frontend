@@ -18,8 +18,14 @@
         <v-btn
           icon="fa-solid fa-user"
           class="ml-3"
-          to="/profil"
+          to="/myprofil"
           data-tippy-content="My profile"
+        ></v-btn>
+        <v-btn
+          icon="fa-solid fa-bell"
+          class="ml-3"
+          to="/notification"
+          data-tippy-content="Notifications"
         ></v-btn>
 
         <!-- Icon to know the role of user-->
