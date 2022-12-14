@@ -3,23 +3,17 @@
 </template>
 
 <script>
+export default {
+  name: "Logout",
+  data: () => ({}),
+  methods: {},
+  mounted() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
 
-  export default {
-    name: "Logout",
-    data: () => ({
-
-    }),
-    methods: {
-
-      
-    },
-    mounted() {
-        localStorage.removeItem('token');
-        location.href = "/"
-    }
-    
-  }
+    location.href = "/";
+  },
+};
 </script>
-<style>
-
-</style>
+<style></style>

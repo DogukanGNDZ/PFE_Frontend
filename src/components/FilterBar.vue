@@ -5,7 +5,7 @@
         <v-select :items="items" label="Sport"></v-select>
       </v-col>
       <v-col cols="12" sm="3">
-        <v-select :items="items" filled label="Age"></v-select>
+        <v-select :items="items" label="Age"></v-select>
       </v-col>
       <v-col cols="12" sm="3">
         <v-select :items="items" label="Country"></v-select>
