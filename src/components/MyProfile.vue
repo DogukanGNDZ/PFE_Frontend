@@ -1,58 +1,80 @@
 <template>
-  <v-container class="Profile-page pa-0 ma-0" v-if="!edit">
-    <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
-    <v-col>
-      <v-avatar size="200" style="position: absolute; top: 12%; left: 5%">
-        <v-img v-if="imageUrl" :src="imageUrl"></v-img>
-      </v-avatar>
-    </v-col>
-    <v-col>
-      <v-btn
-        icon="fa-solid fa-pen"
-        @click="handleEdit"
-        data-tippy-content="Edit Profile"
-      ></v-btn>
-    </v-col>
-    <v-list-item color="rgba(0, 0, 0, .4)">
-      <v-list-item-content>
-        <v-list-item-title class="title">Jerome Devaux</v-list-item-title>
-        <v-list-item-subtitle>Football Player</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-    <v-row>
-      <v-col>
-        <v-card style="border-color: white !important; border-width: 0px">
-          <v-card-title>Details</v-card-title>
-          <v-card-text>
-            <EasyDataTable
-              :headers="headers"
-              :items="items"
-              theme-color="#1d90ff"
-              table-class-name="customize-table"
-              hide-footer
-              alternating
-              no-hover
-            />
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card height="100%">
-          <v-card-title>About Me</v-card-title>
-          <v-card-text>
-            {{ description }}
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+  
+    <v-container class="Profile-page pa-0 ma-0" v-if="!edit">
+        
+            <v-div v-if="imageUrlB!==`https://pfeimages.blob.core.windows.net/imagess/`">
+              <v-img class="grey backImage" v-if="imageUrlB" :src="imageUrlB"></v-img>
+            </v-div>
+            <v-div v-else>
+              <v-img class="grey backImage" src="../assets/dunking.png"></v-img>
+            </v-div>
+            
+            <v-col v-if="imageUrl!==`https://pfeimages.blob.core.windows.net/imagess/`">
+            <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img  v-if="imageUrl" :src="imageUrl"  ></v-img>
+            </v-avatar>
+            </v-col>
+            <v-col v-else>
+            <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img   src="../assets/dunking.png"  ></v-img>
+            </v-avatar>
+            </v-col>
+            <v-col>
+              <v-btn icon="fa-solid fa-pen" @click="handleEdit" data-tippy-content="Edit Profile"></v-btn>
+            </v-col>
+            <v-list-item color="rgba(0, 0, 0, .4)">
+              <v-list-item-content>
+                <v-list-item-title class="title">Jerome Devaux</v-list-item-title>
+                <v-list-item-subtitle>Football Player</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-row>
+                <v-col>
+                    <v-card style="border-color: white !important; border-width: 0px;">
+                        <v-card-title>Details</v-card-title>
+                        <v-card-text>
+                            <EasyDataTable
+                                :headers="headers"
+                                :items= "items"
+                                theme-color="#1d90ff"
+                                table-class-name="customize-table"
+                                hide-footer
+                                alternating
+                                no-hover
+                                />
+                        </v-card-text>
+                    </v-card>
+
+                </v-col>
+                <v-col>
+                    <v-card height="100%">
+                        <v-card-title>About Me</v-card-title>
+                        <v-card-text>
+                            {{description}}
+                        </v-card-text>
+                    </v-card>
+
+                </v-col>
+            </v-row>
   </v-container>
   <v-container class="Profile-page pa-0 ma-0" v-else>
-    <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
-    <v-col>
-      <v-avatar size="200" style="position: absolute; top: 12%; left: 5%">
-        <v-img v-if="imageUrl" :src="imageUrl"></v-img>
-      </v-avatar>
-    </v-col>
+    <v-div v-if="imageUrlB!==`https://pfeimages.blob.core.windows.net/imagess/`">
+              <v-img class="grey backImage" v-if="imageUrlB" :src="imageUrlB"></v-img>
+            </v-div>
+            <v-div v-else>
+              <v-img class="grey backImage" src="../assets/dunking.png"></v-img>
+            </v-div>
+            
+            <v-col v-if="imageUrl!==`https://pfeimages.blob.core.windows.net/imagess/`">
+            <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img  v-if="imageUrl" :src="imageUrl"  ></v-img>
+            </v-avatar>
+            </v-col>
+            <v-col v-else>
+            <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img   src="../assets/dunking.png"  ></v-img>
+            </v-avatar>
+            </v-col>
     <v-col>
       <v-btn
         icon="fa-solid fa-pen"
@@ -144,22 +166,40 @@
               <!-- v-model="item.value" -->
             </v-row>
           </li>
-        </v-col>
-        <v-col>
-          <p>About Me</p>
-          <v-text-field
-            style="background-color: white"
-            v-model="description"
-            :value="description"
-            class="text-xs-center"
-          ></v-text-field>
-          <div>
-            <input type="file" @change="onFileChange" />
-            <v-btn @click="uploadImage">Upload Image</v-btn>
-          </div>
-        </v-col>
-      </v-row>
-      <v-btn type="submit"> Validate changes </v-btn>
+
+
+        
+        
+
+      </v-col>
+      <v-col>
+        <p>About Me</p>
+        <v-text-field style="background-color : white" v-model="description" :value="description" class="text-xs-center"></v-text-field>
+                <div>
+                  <h3 class="text-left">Change Profile picture</h3>
+                  <v-file-input
+                    @change="onFileChange"
+                    hide-input
+                    show-size
+                    truncate-length="20"
+                ></v-file-input>
+                <v-btn class="ma-2" outlined rounded color="success" @click="uploadImage">Upload Image</v-btn>
+              </div>
+              <div>
+                <h3 class="text-left">Change Banner</h3>
+                <v-file-input
+                    @change="onFileChangeB"
+                    hide-input
+                    show-size
+                    truncate-length="20"
+                ></v-file-input>
+                <v-btn class="ma-2" outlined rounded color="success" @click="uploadImageB">Upload Image</v-btn>
+            </div>
+      </v-col>
+    </v-row>     
+          <v-btn type="submit">
+            Validate changes
+          </v-btn>
     </v-form>
   </v-container>
   <!-- <v-card class="mx-auto" max-width="434" tile>
@@ -285,46 +325,46 @@ export default {
     tippy("[data-tippy-content]");
   },
 
-  beforeMount() {
-    axios
-      .get(server.baseURLDev + "users/myprofil", {
-        headers: {
-          Authorize: localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        this.items[0].value = response.data.firstname;
-        this.items[1].value = response.data.lastname;
-        this.items[2].value = response.data.email;
-        if (response.data.description.length != 0) {
-          this.description = response.data.description;
-        }
-        if (response.data.age != 0) {
-          this.items[3].value = response.data.age;
-        }
-        if (response.data.post.length != 0) {
-          this.items[6].value = response.data.post;
-        }
-        if (response.data.size != 0) {
-          this.items[7].value = response.data.size;
-        }
-        if (response.data.weight != 0) {
-          this.items[8].value = response.data.weight;
-        }
-        this.items[9].value = response.data.number_year_experience;
-        this.imageName = response.data.picture;
-        this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/${this.imageName}`;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+     beforeMount() {
+      axios.get(server.baseURLDev+'users/myprofil', {
+          headers: {
+            'Authorize': localStorage.getItem('token')
+          }
+        })
+        .then((response) =>{
+          console.log(response);
+          this.items[0].value = response.data.firstname;
+          this.items[1].value = response.data.lastname;
+          this.items[2].value = response.data.email;
+          if (response.data.description.length != 0){
+            this.description = response.data.description;
+          }
+          if (response.data.age != 0) {
+            this.items[3].value = response.data.age;
+          }
+          if (response.data.post.length != 0){
+            this.items[6].value = response.data.post;
+          }
+          if (response.data.size != 0) {
+            this.items[7].value = response.data.size;
+          }
+          if (response.data.weight != 0) {
+            this.items[8].value = response.data.weight;
+          }
+          this.items[9].value = response.data.number_year_experience;
+          this.imageName=response.data.picture;
+          this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/${this.imageName}`;
+          this.imageUrlB = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture_banner;
 
-    axios
-      .get(server.baseURLDev + "sports")
-      .then((response) => {
-        console.log("AAAALLLL spooooort");
-        console.log(response);
+        })
+        .catch(error => {
+            console.log(error)
+          })
+      
+      axios.get(server.baseURLDev+'sports')
+      .then(response => {
+        console.log("AAAALLLL spooooort")
+        console.log(response)
         var arraytoreturn = [];
         response.data.forEach((element) => {
           arraytoreturn.push(element.name);
@@ -405,34 +445,34 @@ export default {
       });
   },
 
-  data: () => ({
-    imageName: "",
-    imageUrl: null,
-    imageData: null,
-    country: "",
-    city: "",
-    sports: ["Football", "Basketball", "Volley"],
-    description: "No description yet",
-    edit: false,
-    headers: [
-      { text: "CATEGORY", value: "category" },
-      { text: "VALUE", value: "value" },
-    ],
-    items: [
-      { category: "Firstname", value: "/" },
-      { category: "Lastname", value: "/" },
-      { category: "Email", value: "/" },
-      { category: "Age", value: "/" },
-      { category: "Role", value: "/" },
-      { category: "Sport", value: "/" },
-      { category: "Post", value: "/" },
-      { category: "Size", value: "/" },
-      { category: "Weight", value: "/" },
-      { category: "Years of experience", value: "/" },
-      { category: "Actual CLub", value: "/" },
-      { category: "Adresse", value: "/" },
-    ],
-  }),
+    data: () => ({
+        imageName:'',
+        imageUrl: null,
+        imageData: null,
+        country : "",
+        city: "",
+        sports: ["Football", "Basketball", "Volley"],
+        description: "No description yet",
+        edit: false,
+        headers: [
+          { text: "CATEGORY", value: "category" },
+          { text: "VALUE", value: "value"},
+        ],
+        items: [
+          { category: "Firstname", value: "/" },
+          { category: "Lastname", value: "/"},
+          { category: "Email", value: "/"},
+          { category: "Age", value: "/"},
+          { category: "Role", value: "/"},
+          { category: "Sport", value: "/"},
+          { category: "Post", value: "/"},
+          { category: "Size", value: "/"},
+          { category: "Weight", value: "/"},
+          { category: "Years of experience", value: "/"},
+          { category: "Actual CLub", value: "/"},
+          { category: "Adresse", value: "/"},
+        ],
+    }),
 
   methods: {
     onFileChange(event) {
@@ -464,22 +504,22 @@ export default {
           console.log(error);
         });
     },
-    sportArrayToNameSportArray(array) {
-      var arraytoreturn = [];
-      array.forEach((element) => {
-        arraytoreturn.push(element.name);
-      });
-      return arraytoreturn;
-    },
-    handleEdit() {
-      this.edit = !this.edit;
-    },
-    handleUpdateProfil() {
-      console.log(localStorage.getItem("token"));
-      const headers = {
-        "Content-Type": "application/json",
-        Authorize: localStorage.getItem("token"),
-      };
+      sportArrayToNameSportArray(array){
+        var arraytoreturn = [];
+        array.forEach(element => {
+          arraytoreturn.push(element.name) 
+        });
+        return arraytoreturn;
+      },
+      handleEdit(){
+        this.edit = !this.edit;
+      },
+      handleUpdateProfil(){
+        console.log(localStorage.getItem('token'))
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorize': localStorage.getItem('token')
+        };
 
       const body = {
         firstname: this.items[0].value,
