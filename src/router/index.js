@@ -14,6 +14,7 @@ import Notification from "@/views/NotificationView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
 import MyClub from "@/views/MyClub.vue";
+import MyCoach from "@/views/MyCoachView.vue";
 import axios from "axios";
 import { server } from "../helper";
 
@@ -100,6 +101,11 @@ const routes = [
     path: "/myClub",
     name: "My Club",
     component: MyClub,
+  },
+  {
+    path: "/mycoach",
+    name: "My Coach",
+    component: MyCoach,
   },
 ];
 
