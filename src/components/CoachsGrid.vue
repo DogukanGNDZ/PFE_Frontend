@@ -15,7 +15,7 @@
           <v-row>
             <v-col cols="12">
               <v-img
-                src="https://randomuser.me/api/portraits/men/10.jpg"
+                :src="'https://pfeimages.blob.core.windows.net/imagess/' + coach.picture "
                 class="rounded-circle float-left"
                 width="30px"
                 alt=""

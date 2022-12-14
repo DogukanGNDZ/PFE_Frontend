@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-img src="../assets/logo.png" class="imgTeams"></v-img>
+          <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
           <h2>National Basketball Vue</h2>
           <h2>{{ this.$route.params.id }}</h2>
           <div class="my-3">
@@ -56,6 +56,7 @@ export default {
   name: "ProfileClub",
   data() {
     return {
+      urlImage:null,
       infoClub: [],
     };
   },
@@ -64,7 +65,7 @@ export default {
     console.log(id);
     axios
       .get(server.baseURLDev + "users/id/" + id)
-      .then((response) => console.log(response.data))
+      .then((response) => this.urlImage= this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture)
       .catch((error) => {
         console.log(error);
       });
