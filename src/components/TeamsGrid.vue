@@ -13,7 +13,7 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="2">
-              <v-img src="../assets/logo.png" class="imgTeams"></v-img>
+              <v-img :src="'https://pfeimages.blob.core.windows.net/imagess/' + club.picture " class="imgTeams"></v-img>
             </v-col>
             <v-col cols="9 text-left">
               <h2>{{ club.name }}</h2>
@@ -47,7 +47,10 @@ export default {
   mounted() {
     axios
       .get(server.baseURLDev + "clubs")
-      .then((response) => (this.clubs = response.data))
+      .then((response) => {
+        this.clubs = response.data;
+        console.log(response.data);
+      })
       .catch((error) => {
         console.log(error);
       });
