@@ -68,7 +68,7 @@ const routes = [
     component: Login,
   },
   {
-    path: "/myprofil",
+    path: "/profil",
     name: "My Profil",
     component: MyProfil,
   },
