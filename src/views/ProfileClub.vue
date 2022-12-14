@@ -76,7 +76,6 @@ export default {
         this.imageUrl =
           `https://pfeimages.blob.core.windows.net/imagess/` +
           response.data.picture;
-        console.log(this.imageUrl);
       })
       .catch((error) => {
         console.log(error);
