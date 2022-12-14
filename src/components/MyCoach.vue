@@ -1,12 +1,24 @@
 <template>
   
   <v-container class="Profile-page pa-0 ma-0" v-if="!edit">
-    <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
-    <v-col>
-      <v-avatar size="200" style="position: absolute; top: 12%; left: 5%">
-        <v-img v-if="imageUrl" :src="imageUrl"></v-img>
-      </v-avatar>
+    <v-div v-if="imageUrlB!==`https://pfeimages.blob.core.windows.net/imagess/`">
+      <v-img class="grey backImage"  :src="imageUrlB"></v-img>
+    </v-div>
+    <v-div v-else>
+              <v-img class="grey backImage" src="../assets/dunking.png"></v-img>
+            </v-div>
+
+    <v-col v-if="imageUrl!==`https://pfeimages.blob.core.windows.net/imagess/`">  
+          <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img  v-if="imageUrl" :src="imageUrl"  ></v-img>
+          </v-avatar>
     </v-col>
+    <v-col v-else>
+          <v-avatar size="200" style="position:absolute; top: 12%; left: 5%;">
+              <v-img   src="../assets/dunking.png"  ></v-img>
+          </v-avatar>
+    </v-col>
+
     <v-col>
       <v-btn
         icon="fa-solid fa-pen"
@@ -48,7 +60,12 @@
     </v-row>
   </v-container>
   <v-container class="Profile-page pa-0 ma-0" v-else>
-    <v-img class="grey backImage" contain src="../assets/dunking.png"></v-img>
+    <v-div v-if="imageUrlB!==`https://pfeimages.blob.core.windows.net/imagess/`">
+              <v-img class="grey backImage" v-if="imageUrlB" :src="imageUrlB"></v-img>
+            </v-div>
+            <v-div v-else>
+              <v-img class="grey backImage" src="../assets/dunking.png"></v-img>
+            </v-div>
     <v-col>
       <v-avatar size="200" style="position: absolute; top: 12%; left: 5%">
         <v-img v-if="imageUrl" :src="imageUrl"></v-img>
@@ -155,9 +172,25 @@
             class="text-xs-center"
           ></v-text-field>
           <div>
-            <input type="file" @change="onFileChange" />
-            <v-btn @click="uploadImage">Upload Image</v-btn>
-          </div>
+                  <h3 class="text-left">Change Profile picture</h3>
+                  <v-file-input
+                    @change="onFileChange"
+                    hide-input
+                    show-size
+                    truncate-length="20"
+                ></v-file-input>
+                <v-btn class="ma-2" outlined rounded color="success" @click="uploadImage">Upload Image</v-btn>
+              </div>
+              <div>
+                <h3 class="text-left">Change Banner</h3>
+                <v-file-input
+                    @change="onFileChangeB"
+                    hide-input
+                    show-size
+                    truncate-length="20"
+                ></v-file-input>
+                <v-btn class="ma-2" outlined rounded color="success" @click="uploadImageB">Upload Image</v-btn>
+            </div>
         </v-col>
       </v-row>
       <v-btn type="submit"> Validate changes </v-btn>
@@ -192,7 +225,9 @@ export default {
         }
         this.items[6].value = response.data.number_year_experience;
         this.imageName = response.data.picture;
+        this.imageNameBan= response.data.picture_banner;
         this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/${this.imageName}`;
+        this.imageUrlB = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture_banner;
       })
       .catch((error) => {
         console.log(error);
@@ -294,8 +329,11 @@ export default {
   data: () => ({
     edit: false,
     imageName: "",
+    imageNameBan:null,
     imageUrl: null,
     imageData: null,
+    imageUrlB: null,
+    imageDataB: null,
     country: "",
     city: "",
     sports: [],
@@ -317,6 +355,66 @@ export default {
     ],
   }),
   methods: {
+    onFileChange(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageUrl = e.target.result;
+        this.imageData = file;
+      };
+      reader.readAsDataURL(file);
+    },
+    uploadImage() {
+      const formData = new FormData();
+      formData.append("image", this.imageData);
+
+      axios
+        .post(server.baseURLDev + "users/uploadImage", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorize: localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          // Handle the response from the server
+          console.log(response);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error);
+        });
+    },
+    onFileChangeB(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageUrlB = e.target.result;
+        this.imageDataB = file;
+      };
+      reader.readAsDataURL(file);
+    },
+    uploadImageB() {
+      const formData = new FormData();
+      formData.append("image", this.imageDataB);
+
+      axios
+        .post(server.baseURLDev + "users/uploadImageBanner", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorize: localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          // Handle the response from the server
+          console.log(response);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error);
+        });
+    },
+
+
     handleEdit(){
         this.edit = !this.edit;
       },
@@ -332,8 +430,8 @@ export default {
         age: this.items[3].value,
         number_year_experience: this.items[6].value,
         description : this.description,
-        picture: '',
-        picture_banner: '',
+        picture: this.imageName, 
+        picture_banner: this.imageNameBan,
         
       };
       axios.put(server.baseURLDev+"coachs/update", body, { headers: headers })
