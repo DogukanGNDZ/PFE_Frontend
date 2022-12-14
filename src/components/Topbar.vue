@@ -15,13 +15,31 @@
       </v-col>
 
       <v-col cols="4" class="text-right">
-        <v-btn
-          icon="fa-solid fa-user"
-          class="ml-3"
-          to="/myprofil"
-          data-tippy-content="My profile"
-        ></v-btn>
-
+        <div style="display: inline-block">
+        <div v-if="role == null"></div>
+        <div v-else-if="role === 'player'">
+          <v-btn
+            icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myprofil"
+            data-tippy-content="My profile"
+          ></v-btn>
+        </div>
+        <div v-else-if="role === 'coach'">
+          <v-btn icon="fa-solid fa-user"
+            class="ml-3"
+            to="/mycoach"
+            data-tippy-content="My Coach"
+          ></v-btn>
+        </div>
+        <div v-else><v-btn
+            icon="fa-solid fa-user"
+            class="ml-3"
+            to="/myclub"
+            data-tippy-content="My Club"
+          ></v-btn>
+        </div>
+      </div>
         <!-- Icon to know the role of user-->
         <div style="display: inline-block">
           <div v-if="role == null"></div>
