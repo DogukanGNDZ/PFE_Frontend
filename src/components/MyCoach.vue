@@ -85,7 +85,7 @@
               v-if="
                 item.category == items[2].category ||
                 item.category == items[4].category ||
-                item.category == items[10].category
+                item.category == items[7].category
               "
             >
               <v-col class="my-auto"
@@ -108,7 +108,7 @@
                 ></v-select
               ></v-col>
             </v-row>
-            <v-row v-else-if="item.category == items[11].category">
+            <v-row v-else-if="item.category == items[8].category">
               <v-col class="my-auto"
                 ><p class="text-xs-center">{{ item.category }} :</p></v-col
               >
@@ -222,7 +222,9 @@ export default {
       .then((response) => {
         console.log("spooooort");
         console.log(response);
-        this.items[5].value = response.data[0].name;
+        if (response.data.length > 0) {
+          this.items[5].value = response.data[0].name;
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -250,8 +252,11 @@ export default {
       .then((response) => {
         console.log("adresse");
         console.log(response);
-        this.country = response.data[0].country;
-        this.city = response.data[0].city;
+        if (response.data.length > 0) {
+          this.country = response.data[0].country;
+          this.city = response.data[0].city;
+        }
+        
         if (this.country != undefined) {
           if (this.city != undefined) {
             this.items[8].value = this.country + " " + this.city;
@@ -276,7 +281,10 @@ export default {
       .then((response) => {
         console.log("Cluuuub");
         console.log(response);
-        this.items[7].value = response.data[0].name;
+        if (response.data.length > 0) {
+          this.items[7].value = response.data[0].name;
+        }
+        
       })
       .catch((error) => {
         console.log(error);
@@ -284,13 +292,14 @@ export default {
   },
 
   data: () => ({
+    edit: false,
     imageName: "",
     imageUrl: null,
     imageData: null,
     country: "",
     city: "",
     sports: [],
-    description: "",
+    description: "No description yet",
     headers: [
       { text: "CATEGORY", value: "category" },
       { text: "VALUE", value: "value" },
@@ -307,6 +316,67 @@ export default {
       { category: "Adresse", value: "/" },
     ],
   }),
+  methods: {
+    handleEdit(){
+        this.edit = !this.edit;
+      },
+    handleUpdateProfil(){
+      const headers = {
+          'Content-Type': 'application/json',
+          'Authorize': localStorage.getItem('token')
+        };
+      const body = {
+        firstname: this.items[0].value,
+        lastname: this.items[1].value,
+        email: this.items[2].value,
+        age: this.items[3].value,
+        number_year_experience: this.items[6].value,
+        description : this.description,
+        picture: '',
+        picture_banner: '',
+        
+      };
+      axios.put(server.baseURLDev+"coachs/update", body, { headers: headers })
+      .then((response) => {
+          console.log("userUPDAAAATE");
+          console.log(response.data);
+      })
+      .catch((error) => {
+          // handle error
+          console.log("erroooooor");
+          console.log(error);
+      });
+
+      axios
+        .put(server.baseURLDev + "sports/addSport", {
+          name: this.items[5].value,
+          email: localStorage.getItem("email"),
+        })
+        .then((response) => {
+          console.log("add sport");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+      .post(server.baseURLDev + "adresses/create", {
+        country: this.country,
+        city: this.city,
+        street: "",
+        number: 0,
+        email: localStorage.getItem("email"),
+      })
+      .then((response) => {
+        console.log("add adresse");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+  }
 }
 
 </script>
