@@ -15,8 +15,10 @@
           <v-row>
             <v-col cols="12">
               <v-img
-
-                :src="'https://pfeimages.blob.core.windows.net/imagess/' + player.picture "
+                :src="
+                  'https://pfeimages.blob.core.windows.net/imagess/' +
+                  player.picture
+                "
                 class="rounded-circle float-left"
                 width="30px"
                 alt=""
@@ -39,13 +41,11 @@
           <div class="lineBetween"></div>
           <v-row class="my-3">
             <v-col cols="6" style="border-right: solid 1px #eb6969">
-              Nationality <br />
               Size <br />
               Weight <br />
               Position
             </v-col>
             <v-col cols="6">
-              American <br />
               {{ player.size }} cm <br />
               {{ player.weight }} kg <br />
               {{ player.post }}
@@ -71,11 +71,11 @@ export default {
   mounted() {
     axios
       .get(server.baseURLDev + "users")
-      .then(response => {      
-        console.log('liste')
-      console.log(response)
-      this.players = response.data})
-      
+      .then((response) => {
+        console.log("liste");
+        console.log(response);
+        this.players = response.data;
+      })
 
       .catch((error) => {
         console.log(error);
