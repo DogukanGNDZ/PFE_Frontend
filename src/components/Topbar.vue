@@ -35,7 +35,7 @@
         <div v-else><v-btn
             icon="fa-solid fa-user"
             class="ml-3"
-            to="/myclub"
+            to="/myClub"
             data-tippy-content="My Club"
           ></v-btn>
         </div>

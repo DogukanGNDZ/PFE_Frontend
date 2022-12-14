@@ -13,7 +13,7 @@ import MyProfil from "@/views/MyProfilView.vue";
 import Notification from "@/views/NotificationView.vue";
 import Logout from "@/components/Logout.vue";
 import ProfilePlayer from "@/views/ProfilePlayer.vue";
-import MyClub from "@/components/MyClub.vue";
+import MyClub from "@/views/MyClub.vue";
 import axios from "axios";
 import { server } from "../helper";
 
