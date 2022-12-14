@@ -1,8 +1,41 @@
 <template>
+    <!-- <v-container>
+        <EasyDataTable
+                                :headers="headers"
+                                :items= "items"
+                                theme-color="#1d90ff"
+                                table-class-name="customize-table"
+                                hide-footer
+                                alternating
+                                no-hover
+                                />
+    </v-container> -->
     <v-container>
-        <li v-for="item in items" :key="item.id" style="list-style: none">
-        </li>
-    </v-container>
+    <v-row class="mx-3">
+      <v-col
+        v-for="item in this.items"
+        :key="item.id"
+        cols="12"
+        xs="12"
+        sm="12"
+        md="12"
+      >
+        <v-card class="playerCard">
+          <!-- ROW -->
+          <v-row>
+            <v-col cols="9 text-left">
+              <h2>{{ item.content }}</h2>
+              <strong>{{ item.date }}</strong>
+            </v-col>
+            <v-col cols="1" class="my-3">
+                <button type="button" @click="handleDeleteNotification(item.id)"><i class="fa-solid fa-trash-can" style="color: red; height:30px" ></i></button>
+                <!-- <v-btn icon="fa-solid fa-trash-can" @click="handleDeleteNotification(item.id)"></v-btn> -->
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 
 
 </template>
@@ -19,7 +52,7 @@ import { server } from '../helper';
           { text: "Content", value: "content"},
         ],
         items: [
-          { date: "", content: "" },
+          
         ],
 
     }),
@@ -29,14 +62,33 @@ import { server } from '../helper';
             console.log("notifications")
             console.log(response)
             response.data.forEach(element => {
-                var e = { date : element.date_and_time, content : element.content}
-                this.items.push(e)
+                if (element.etat == 'active'){
+                    console.log("active")               
+                    var e = { date : element.date_and_time, content : element.content, id : element.id}
+                    this.items.push(e)
+                }
+
             });
             console.log(this.items)
         })
         .catch(error => {
             console.log(error)
         })
+    },
+    methods: {
+        async handleDeleteNotification(id){
+            await axios.post(server.baseURLDev+'notifications/updateState',{
+                id : id
+            })
+            .then(
+                // this.$router.push({ path: "/notification"  })
+                
+            )
+            .catch(error => {
+                console.log(error)
+            })
+            this.$router.go()
+        }
     }
   }
 
