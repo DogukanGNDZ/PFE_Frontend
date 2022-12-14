@@ -47,7 +47,10 @@ export default {
   mounted() {
     axios
       .get(server.baseURLDev + "clubs")
-      .then((response) => (this.clubs = response.data))
+      .then((response) => {
+        this.clubs = response.data;
+        console.log(response.data);
+      })
       .catch((error) => {
         console.log(error);
       });
