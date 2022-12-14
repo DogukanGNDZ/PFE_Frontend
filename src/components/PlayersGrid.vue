@@ -14,16 +14,27 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="12">
-              <v-img
-                :src="
-                  'https://pfeimages.blob.core.windows.net/imagess/' +
-                  player.picture
-                "
-                class="rounded-circle float-left"
-                width="30px"
-                alt=""
-              >
+              <v-div v-if="player.picture!==``">
+                <v-img
+                  :src="
+                    'https://pfeimages.blob.core.windows.net/imagess/' +
+                    player.picture
+                  "
+                  class="rounded-circle float-left"
+                  width="30px"
+                  alt=""
+                >
+                </v-img>
+              </v-div>
+              <v-div v-else>
+                <v-img
+                  src="../assets/dunking.png"
+                  class="rounded-circle float-left"
+                  width="30px"
+                  alt=""
+                >
               </v-img>
+              </v-div>
               <p class="float-left ml-3 namePlayer">
                 {{ player.firstname }} {{ player.lastname }}
               </p>
