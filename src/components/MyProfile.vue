@@ -355,6 +355,7 @@ export default {
           this.imageName=response.data.picture;
           this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/${this.imageName}`;
           this.imageUrlB = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture_banner;
+          this.pict_ban =response.data.picture_banner;
 
         })
         .catch(error => {
@@ -451,6 +452,7 @@ export default {
         imageData: null,
         imageUrlB: null,
         imageDataB: null,
+        pict_ban:null,
         country : "",
         city: "",
         sports: ["Football", "Basketball", "Volley"],
@@ -563,7 +565,8 @@ export default {
         weight: this.items[8].value,
         number_year_experience: this.items[9].value,
         description: this.description,
-        picture: "",
+        picture: this.imageName,
+        pict_ban: this.pict_ban
       };
 
       axios
