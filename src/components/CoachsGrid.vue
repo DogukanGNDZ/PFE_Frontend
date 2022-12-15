@@ -33,7 +33,17 @@
             <v-card-text class="text-left textCard">
               <p class="mb-2">
                 {{ coach.age }} years <br />
-                Football
+                {{ setCount()}}
+                <v-div v-for="sportt in this.sports" :key="sportt.id">
+                  <v-div v-if="coach.id == sportt.id"> 
+                    {{ sportt.sport }}
+                    {{ handleCount()}}
+                  </v-div>
+
+                </v-div>                  
+                <v-div v-if="this.count == 0">
+                    No Sport yet
+                </v-div>
               </p>
               <p class="my-2">
                 {{ coach.description }}
@@ -66,10 +76,12 @@ export default {
   data() {
     return {
       coachs: [],
+      sports: [],
+      count: 0,
     };
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get(server.baseURLDev + "coachs")
       .then((response) => {
         console.log(response.data);
@@ -77,12 +89,39 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+      })
+    this.coachs.forEach(element => {
+      console.log(element.email)    
+      axios
+      .get(
+        server.baseURLDev +
+          "sports/userSport?email=" +
+          element.email
+      )
+      .then((response) => {
+        console.log("spooooort");
+        console.log(response);
+        // var sportt
+        this.sports.push({sport : response.data[0].name, id : element.id})
+      })
+      .catch((error) => {
+        console.log(error);
       });
+    })
+
+
   },
   methods: {
     redirectToProfileCoach(id) {
       this.$router.push({ path: "/coachs/" + id });
     },
+    handleCount() {
+      this.count +=1
+    },
+
+    setCount() {
+      this.count = 0
+    }
   },
 };
 </script>
