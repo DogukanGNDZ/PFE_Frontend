@@ -14,7 +14,7 @@
           </v-div>
           <v-div v-else>
             <v-avatar size="200">
-              <v-img class="imgTeams" src="../assets/dunking.png"></v-img>
+              <v-img class="imgTeams" src="../assets/coach.png"></v-img>
             </v-avatar>
           </v-div>
 
