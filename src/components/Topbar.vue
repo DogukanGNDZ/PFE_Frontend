@@ -1,17 +1,7 @@
 <template>
   <v-container>
     <v-row class="mx-3">
-      <v-col cols="8">
-        <v-text-field
-          class="text-field-search"
-          hide-details
-          label="Search"
-          placeholder="Search"
-          filled
-          dense
-          single-line
-        ></v-text-field>
-      </v-col>
+      <v-col cols="8"> </v-col>
 
       <!-- <v-col cols="4" class="text-right">
         <div style="display: inline-block">
