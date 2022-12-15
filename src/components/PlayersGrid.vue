@@ -1,5 +1,22 @@
 <template>
   <v-container>
+    <v-row class="mx-3">
+      <v-col cols="12">
+        <v-text-field
+          v-model="search"
+          class="text-field-search"
+          hide-details
+          label="Search"
+          placeholder="Search"
+          filled
+          dense
+          single-line
+        ></v-text-field>
+      </v-col>
+      <v-col cols="4">
+        <v-btn block @click="handleSearchSubmit()"> Filter </v-btn>
+      </v-col>
+    </v-row>
     <!-- ROW -->
     <v-row class="mx-3">
       <v-col
@@ -14,7 +31,7 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="12">
-              <v-div v-if="player.picture!==``">
+              <v-div v-if="player.picture !== ``">
                 <v-img
                   :src="
                     'https://pfeimages.blob.core.windows.net/imagess/' +
@@ -33,7 +50,7 @@
                   width="30px"
                   alt=""
                 >
-              </v-img>
+                </v-img>
               </v-div>
               <p class="float-left ml-3 namePlayer">
                 {{ player.firstname }} {{ player.lastname }}
@@ -77,14 +94,13 @@ export default {
   data() {
     return {
       players: [],
+      search: null,
     };
   },
   mounted() {
     axios
       .get(server.baseURLDev + "users")
       .then((response) => {
-        console.log("liste");
-        console.log(response);
         this.players = response.data;
       })
 
@@ -95,6 +111,25 @@ export default {
   methods: {
     redirectToProfilePlayer(id) {
       this.$router.push({ path: "/players/" + id });
+    },
+
+    handleSearchSubmit() {
+      axios
+        .get(
+          server.baseURLDev +
+            "users/searchUser?role=player&name=" +
+            this.search +
+            "&country="
+        )
+        .then((response) => {
+          console.log(response.data);
+          this.players = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      //users/searchUser?role=player&name=mar&country=Listembour
     },
   },
 };

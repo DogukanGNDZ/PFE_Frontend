@@ -3,7 +3,9 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
+          <v-avatar size="200">
+            <v-img v-if="imageUrl" :src="imageUrl" class="imgTeams"></v-img>
+          </v-avatar>
           <h2>{{ infoClub.name }}</h2>
           <!-- <div class="my-3">
             <v-btn class="ma-2" outlined rounded color="success">

@@ -26,8 +26,6 @@ export default {
     </h1>
     <div v-if="token !== null">
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
-      <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-      <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
       <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
       <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
       <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
@@ -35,10 +33,8 @@ export default {
     </div>
     <div v-else>
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
-      <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
       <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
       <SidebarLink to="/login" icon="fa-solid fa-user">Login</SidebarLink>
-      <SidebarLink to="/about" icon="fas fa-address-card">About</SidebarLink>
       <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
       <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
       <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>

@@ -10,7 +10,7 @@
         sm="6"
         md="4"
       >
-        <v-card class="playerCard">
+        <v-card class="playerCard" @click="redirectToProfileCoach(coach.id)">
           <!-- ROW -->
           <v-row>
             <v-col cols="12">
@@ -36,8 +36,7 @@
                 Football
               </p>
               <p class="my-2">
-                "Listen to your favorite artists and albums whenever and
-                wherever."
+                {{ coach.description }}
               </p>
             </v-card-text>
           </v-row>
@@ -48,7 +47,7 @@
               Club
             </v-col>
             <v-col cols="6">
-              5 years <br />
+              {{ coach.number_year_experience }} years <br />
               RSCA
             </v-col>
           </v-row>
@@ -72,10 +71,18 @@ export default {
   mounted() {
     axios
       .get(server.baseURLDev + "coachs")
-      .then((response) => (this.coachs = response.data))
+      .then((response) => {
+        console.log(response.data);
+        this.coachs = response.data;
+      })
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    redirectToProfileCoach(id) {
+      this.$router.push({ path: "/coachs/" + id });
+    },
   },
 };
 </script>

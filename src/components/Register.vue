@@ -1,9 +1,7 @@
 <template>
   <v-container class="register-page">
     <v-card>
-      <v-card-title>
-        Registration
-      </v-card-title>
+      <v-card-title> Registration </v-card-title>
       <v-card-text>
         <v-form
           ref="form"
@@ -127,6 +125,7 @@ import Club from "../models/club.js";
 export default {
   name: "Register",
   data: () => ({
+    ok: 0,
     errora: null,
     valid: false,
     user: new User("", "", localStorage.getItem("role"), "", ""),
@@ -162,11 +161,13 @@ export default {
         })
         .then((response) => {
           // handle success
+
           this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {
           // handle error
+
           this.errora = "Email already used";
           console.log(error);
         });
@@ -182,11 +183,13 @@ export default {
         })
         .then((response) => {
           // handle success
-        this.$router.push({ path: "/login" });
+
+          this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {
           // handle error
+
           console.log(error);
         });
     },
@@ -200,11 +203,13 @@ export default {
         })
         .then((response) => {
           // handle success
+
           this.$router.push({ path: "/login" });
           console.log(response.data);
         })
         .catch((error) => {
           // handle error
+
           console.log(error);
         });
     },

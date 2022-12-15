@@ -1,5 +1,22 @@
 <template>
   <v-container>
+    <!-- <v-row class="mx-3">
+      <v-col cols="12">
+        <v-text-field
+          v-model="search"
+          class="text-field-search"
+          hide-details
+          label="Search"
+          placeholder="Search"
+          filled
+          dense
+          single-line
+        ></v-text-field>
+      </v-col>
+      <v-col cols="4">
+        <v-btn block @click="handleSearchSubmit()"> Filter </v-btn>
+      </v-col>
+    </v-row> -->
     <v-row class="mx-3">
       <v-col
         v-for="club in this.clubs"
@@ -13,13 +30,15 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="2">
-              <v-img
-                :src="
-                  'https://pfeimages.blob.core.windows.net/imagess/' +
-                  club.picture
-                "
-                class="imgTeams"
-              ></v-img>
+              <v-avatar size="100">
+                <v-img
+                  :src="
+                    'https://pfeimages.blob.core.windows.net/imagess/' +
+                    club.picture
+                  "
+                  class="imgTeams"
+                ></v-img>
+              </v-avatar>
             </v-col>
             <v-col cols="9 text-left">
               <h2>{{ club.name }}</h2>
@@ -28,9 +47,6 @@
               <p>
                 {{ club.description }}
               </p>
-            </v-col>
-            <v-col cols="1">
-              <v-btn icon="fas fa-ellipsis-vertical"></v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -80,6 +96,23 @@ export default {
     redirectToProfileClub(id) {
       this.$router.push({ path: "/clubs/" + id });
     },
+
+    // handleSearchSubmit() {
+    //   axios
+    //     .get(
+    //       server.baseURLDev +
+    //         "users/searchUser?role=club&name=" +
+    //         this.search +
+    //         "&country="
+    //     )
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       this.clubs = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
 };
 </script>

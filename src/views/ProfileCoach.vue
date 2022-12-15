@@ -18,15 +18,15 @@
             </v-avatar>
           </v-div>
 
-          <h2>{{ infoPlayer.firstname }} {{ infoPlayer.lastname }}</h2>
+          <h2>{{ infoCoach.firstname }} {{ infoCoach.lastname }}</h2>
           <div
-            class="my-3"
             v-if="
               roleUsr !== null && roleUsr !== 'player' && roleUsr !== 'coach'
             "
+            class="my-3"
           >
             <v-btn class="ma-2" outlined rounded color="success">
-              Demande de joueur
+              Demande de coach
             </v-btn>
           </div>
         </v-col>
@@ -36,15 +36,13 @@
           <v-card class="pa-3">
             <h3 class="text-left">Informations</h3>
             <v-card-text class="text-left">
-              <p>Email : {{ infoPlayer.email }}</p>
-              <p>Age : {{ infoPlayer.age }}</p>
+              <p>Email : {{ infoCoach.email }}</p>
+              <p>Age : {{ infoCoach.age }}</p>
               <p>
                 Number year of experience :
-                {{ infoPlayer.number_year_experience }} year(s)
+                {{ infoCoach.number_year_experience }} year(s)
               </p>
-              <p>Size : {{ infoPlayer.size }}</p>
-              <p>Weight : {{ infoPlayer.weight }}</p>
-              <p>Position : {{ infoPlayer.post }}</p>
+              <p>Description : {{ infoCoach.description }}</p>
             </v-card-text>
           </v-card>
         </v-col>
@@ -56,12 +54,11 @@
 <script>
 import axios from "axios";
 import { server } from "../helper";
-
 export default {
-  name: "ProfilePlayer",
+  name: "ProfileCoach",
   data() {
     return {
-      infoPlayer: [],
+      infoCoach: [],
       imageUrl: null,
       roleUsr: null,
     };
@@ -80,12 +77,12 @@ export default {
         });
     }
 
+    //Get the id of the coach
     const id = this.$route.params.id;
-    console.log(id);
     axios
       .get(server.baseURLDev + "users/id/" + id)
       .then((response) => {
-        this.infoPlayer = response.data;
+        this.infoCoach = response.data;
         this.imageUrl =
           `https://pfeimages.blob.core.windows.net/imagess/` +
           response.data.picture;
