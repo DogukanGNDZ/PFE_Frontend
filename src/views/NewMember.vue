@@ -77,9 +77,24 @@ export default {
   },
 
   methods: {
-    async handleDeleteNewMember(emailPlayer, emailClub) {
+    async handleDeleteNewMember(emailPlayer) {
       console.log(emailPlayer);
+      const emailClub = localStorage.getItem("email");
       console.log(emailClub);
+
+      axios
+        .post(server.baseURLDev + "clubs/refuseNewMember", {
+          email_member: emailPlayer,
+          email_club: emailClub,
+        })
+        .then(
+          // this.$router.push({ path: "/notification"  })
+          console.log("refuse player")
+          //this.$router.go()
+        )
+        .catch((error) => {
+          console.log(error);
+        });
     },
     async handleAcceptNewMember(emailPlayer) {
       console.log(emailPlayer);
@@ -94,7 +109,7 @@ export default {
         })
         .then(
           // this.$router.push({ path: "/notification"  })
-          this.$router.push({ path: "/newMember" })
+          this.$router.go()
         )
         .catch((error) => {
           console.log(error);
