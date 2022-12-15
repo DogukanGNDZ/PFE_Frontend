@@ -204,6 +204,7 @@
         imageData: null,
         infoClub: [],
         teams: [],
+        imagename:null,
         edit: false,
         sport: "",
         sports: [],
@@ -218,6 +219,7 @@
         .then((response) => {
             this.infoClub = response.data;
             this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture;
+            this.imagename=response.data.picture;
             console.log(this.imageUrl);
         })
         .catch((error) => {
@@ -302,8 +304,8 @@
         name: this.infoClub.name,
         email: this.infoClub.email,
         description: this.infoClub.description,
-        picture: "",
-        pict_banner: ""
+        picture: this.imagename,
+        picture_banner: ""
       };
       axios.put(server.baseURLDev+'clubs/update',body, { headers: headers })
       .then((response) => {
