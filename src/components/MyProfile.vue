@@ -225,117 +225,10 @@
       <v-btn type="submit"> Validate changes </v-btn>
     </v-form>
   </v-container>
-  <!-- <v-card class="mx-auto" max-width="434" tile>
-          <v-img height="100%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
-          <v-col>
-            <v-avatar size="100" style="position:absolute; top: 130px">
-              <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-            </v-avatar>
-          </v-col>
-            <v-list-item color="rgba(0, 0, 0, .4)">
-              <v-list-item-content>
-                <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-                <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-      </v-card> -->
-  <!-- <v-row width="100%">
-          <v-card>
-            <v-img
-              src="https://picsum.photos/350/165?random"
-              height="125"
-
-              class="grey darken-4"
-            ></v-img>
-            <v-card-title class="text-h6">
-              height
-            </v-card-title>
-          </v-card>
-        </v-row>
-
-        <v-row>
-          <v-card width="100%">
-            <v-img
-              src="https://picsum.photos/350/165?random"
-              height="125"
-              width="100%"
-              contain
-              class="grey darken-4"
-            ></v-img>
-            <v-card-title class="text-h6">
-              height with contain
-            </v-card-title>
-          </v-card>
-        </v-row> -->
+  
 </template>
 
-<!-- <script>
-// import axios from 'axios';
-// import { server } from '../helper';
-import { mapGetters } from 'vuex'
-import { reactive} from 'vue';
 
-  export default {
-    name: "Profile",
-    // beforeMount() {
-    //   axios.get(server.baseURLDev+'users/myprofil', {
-    //       headers: {
-    //         'Authorize': localStorage.getItem('token')
-    //       }
-    //     })
-    //     .then((response) =>{
-    //       this.userINfo = response.data;
-    //       this.firstname = response.data.firstname;
-
-    //       console.log(this.firstname);
-    //       console.log("aa");
-    //     })
-    //     .catch(error => {
-    //         // handle error
-    //         console.log(error)
-    //       })
-
-    // },
-    created() {
-        this.$store.dispatch('searchUserByToken')
-        this.items[0].value = this.$store.getters.getFirstname
-    },
-    data () {
-        return reactive({
-        firstname: '',
-        headers: [
-          { text: "CATEGORY", value: "category" },
-          { text: "VALUE", value: "value"},
-        ],
-        items: [
-          { category: "Firstname", value: '' },
-          { category: "Lastname", value: "Dev"},
-          { category: "Email", value: "jerome@gmail.com"},
-          { category: "Age", value: "22"},
-          { category: "Role", value: "Player"},
-          { category: "Sport", value: "Football"},
-          { category: "Position", value: "Forward"},
-          { category: "Size", value: "188cm"},
-          { category: "Weight", value: "78.2"},
-          { category: "Years of experience", value: "5"},
-          { category: "Actual CLub", value: "/"},
-          { category: "Adresse", value: "5030 Gembloux Belgium"},
-        ],
-
-    });},
-    computed: {
-        ...mapGetters({
-        getFFirstname: 'getFirstname',
-        }),
-    },
-
-    methods: {
-
-      
-    },
-    
-  }
-</script> -->
 <script>
 import axios from "axios";
 import { server } from "../helper";
@@ -356,7 +249,6 @@ export default {
         },
       })
       .then((response) => {
-        console.log(response);
         this.items[0].value = response.data.firstname;
         this.items[1].value = response.data.lastname;
         this.items[2].value = response.data.email;
@@ -395,7 +287,6 @@ export default {
           arraytoreturn.push(element.name);
         });
         this.sports = arraytoreturn;
-        console.log(this.sports);
       })
       .catch((error) => {
         console.log(error);
@@ -407,7 +298,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("spooooort");
         console.log(response);
         this.items[5].value = response.data[0].name;
       })
@@ -421,7 +311,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("rooole");
         console.log(response);
         this.items[4].value = response.data;
       })
@@ -435,8 +324,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("adresse");
-        console.log(response);
         this.country = response.data[0].country;
         this.city = response.data[0].city;
         if (this.country != undefined) {
@@ -461,8 +348,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("Cluuuub");
-        console.log(response);
         this.items[10].value = response.data[0].name;
       })
       .catch((error) => {
@@ -573,7 +458,6 @@ export default {
       this.edit = !this.edit;
     },
     handleUpdateProfil() {
-      console.log(localStorage.getItem("token"));
       const headers = {
         "Content-Type": "application/json",
         Authorize: localStorage.getItem("token"),
@@ -596,12 +480,10 @@ export default {
       axios
         .put(server.baseURLDev + "users/update", body, { headers: headers })
         .then((response) => {
-          console.log("userUPDAAAATE");
           console.log(response.data);
         })
         .catch((error) => {
           // handle error
-          console.log("erroooooor");
           console.log(error);
         });
 
@@ -611,7 +493,6 @@ export default {
           email: localStorage.getItem("email"),
         })
         .then((response) => {
-          console.log("add sport");
           console.log(response.data);
         })
         .catch((error) => {
@@ -627,7 +508,6 @@ export default {
           email: localStorage.getItem("email"),
         })
         .then((response) => {
-          console.log("add adresse");
           console.log(response.data);
         })
         .catch((error) => {

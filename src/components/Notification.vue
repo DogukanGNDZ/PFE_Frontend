@@ -67,11 +67,8 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("notifications");
-        console.log(response);
         response.data.forEach((element) => {
           if (element.etat == "active") {
-            console.log("active");
             var e = {
               date: element.date_and_time,
               content: element.content,
@@ -80,7 +77,6 @@ export default {
             this.items.push(e);
           }
         });
-        console.log(this.items);
       })
       .catch((error) => {
         console.log(error);

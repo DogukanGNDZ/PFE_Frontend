@@ -84,7 +84,6 @@ export default {
     await axios
       .get(server.baseURLDev + "coachs")
       .then((response) => {
-        console.log(response.data);
         this.coachs = response.data;
       })
       .catch((error) => {

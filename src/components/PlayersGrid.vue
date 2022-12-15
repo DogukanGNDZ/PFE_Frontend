@@ -113,7 +113,6 @@ export default {
     await axios
       .get(server.baseURLDev + "users")
       .then((response) => {
-        console.log(response)
         this.players = response.data;
       })
 
@@ -157,7 +156,6 @@ export default {
             "&country="
         )
         .then((response) => {
-          console.log(response.data);
           this.players = response.data;
         })
         .catch((error) => {

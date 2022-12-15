@@ -64,7 +64,6 @@ export default {
         })
         .then((response) => {
           this.ok = 1;
-          console.log(response.data);
           localStorage.setItem("token", response.data);
           localStorage.setItem("email", this.email);
           location.href = "/";

@@ -213,7 +213,6 @@ export default {
     axios
       .get(server.baseURLDev + "users/email/"+ localStorage.getItem("email"))
       .then((response) => {
-        console.log(response);
         this.items[0].value = response.data.firstname;
         this.items[1].value = response.data.lastname;
         this.items[2].value = response.data.email;
@@ -236,14 +235,11 @@ export default {
     axios
       .get(server.baseURLDev + "sports")
       .then((response) => {
-        console.log("AAAALLLL spooooort");
-        console.log(response);
         var arraytoreturn = [];
         response.data.forEach((element) => {
           arraytoreturn.push(element.name);
         });
         this.sports = arraytoreturn;
-        console.log(this.sports);
       })
       .catch((error) => {
         console.log(error);
@@ -255,8 +251,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("spooooort");
-        console.log(response);
         if (response.data.length > 0) {
           this.items[5].value = response.data[0].name;
         }
@@ -271,8 +265,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("rooole");
-        console.log(response);
         this.items[4].value = response.data;
       })
       .catch((error) => {
@@ -285,8 +277,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("adresse");
-        console.log(response);
         if (response.data.length > 0) {
           this.country = response.data[0].country;
           this.city = response.data[0].city;
@@ -314,8 +304,6 @@ export default {
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("Cluuuub");
-        console.log(response);
         if (response.data.length > 0) {
           this.items[7].value = response.data[0].name;
         }
@@ -436,12 +424,10 @@ export default {
       };
       axios.put(server.baseURLDev+"coachs/update", body, { headers: headers })
       .then((response) => {
-          console.log("userUPDAAAATE");
           console.log(response.data);
       })
       .catch((error) => {
           // handle error
-          console.log("erroooooor");
           console.log(error);
       });
 
@@ -451,7 +437,6 @@ export default {
           email: localStorage.getItem("email"),
         })
         .then((response) => {
-          console.log("add sport");
           console.log(response.data);
         })
         .catch((error) => {
@@ -467,7 +452,6 @@ export default {
         email: localStorage.getItem("email"),
       })
       .then((response) => {
-        console.log("add adresse");
         console.log(response.data);
       })
       .catch((error) => {
