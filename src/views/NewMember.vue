@@ -56,6 +56,7 @@ export default {
   name: "NewMember",
   data: () => ({
     newMembers: [],
+    newCoachs: [],
   }),
 
   async mounted() {
@@ -66,6 +67,21 @@ export default {
           "clubs/memberRequests?email_club=" +
           email +
           "&role=player"
+      )
+      .then((response) => {
+        this.newMembers = response.data;
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await axios
+      .get(
+        server.baseURLDev +
+          "clubs/memberRequests?email_club=" +
+          email +
+          "&role=coach"
       )
       .then((response) => {
         this.newMembers = response.data;
@@ -95,6 +111,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.$router.go();
     },
     async handleAcceptNewMember(emailPlayer) {
       console.log(emailPlayer);
@@ -114,6 +131,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.$router.go();
     },
   },
 };

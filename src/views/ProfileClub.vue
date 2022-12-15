@@ -58,13 +58,28 @@
                 {{ player.firstname }} {{ player.lastname }}
               </v-col>
               <v-btn
-                v-if="roleUsr !== null && roleUsr !== 'club'"
+                v-if="
+                  roleUsr !== null && roleUsr !== 'club' && roleUsr !== 'coach'
+                "
                 class="ma-2"
                 style="float: right"
                 outlined
                 rounded
                 color="indigo"
                 @click="sendDemandRegisterToAClub(emailUsr, team.id)"
+              >
+                Demande d'inscription
+              </v-btn>
+              <v-btn
+                v-if="
+                  roleUsr !== null && roleUsr !== 'club' && roleUsr !== 'player'
+                "
+                class="ma-2"
+                style="float: right"
+                outlined
+                rounded
+                color="success"
+                @click="sendDemandRegisterToAClubCoach(emailUsr, team.id)"
               >
                 Demande d'inscription
               </v-btn>
@@ -155,6 +170,24 @@ export default {
       axios
         .post(server.baseURLDev + "users/applyClub", {
           email_user: emailUsr,
+          id_team: teamId,
+        })
+        .then((response) => {
+          // handle success
+          alert("You send a demand to this team.");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    sendDemandRegisterToAClubCoach(emailUsr, teamId) {
+      console.log(emailUsr);
+      console.log(teamId);
+      axios
+        .post(server.baseURLDev + "coachs/applyClub", {
+          email_coach: emailUsr,
           id_team: teamId,
         })
         .then((response) => {
