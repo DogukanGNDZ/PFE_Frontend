@@ -78,8 +78,6 @@ export default {
       });
 
     this.clubs.filter((value, index) => {
-      console.log(index);
-      console.log(value.email);
 
       axios
         .get(server.baseURLDev + "sports/userSport?email=" + value.email)
@@ -89,7 +87,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-      console.log(this.listClubs);
     });
   },
   methods: {

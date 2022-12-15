@@ -220,7 +220,6 @@
             this.infoClub = response.data;
             this.imageUrl = `https://pfeimages.blob.core.windows.net/imagess/`+response.data.picture;
             this.imagename=response.data.picture;
-            console.log(this.imageUrl);
         })
         .catch((error) => {
           console.log(error);
@@ -242,7 +241,6 @@
           arraytoreturn.push(element.name);
         });
         this.sports = arraytoreturn;
-        console.log(this.sports);
       })
       .catch((error) => {
         console.log(error);
@@ -254,8 +252,6 @@
           localStorage.getItem("email")
       )
       .then((response) => {
-        console.log("spooooort");
-        console.log(response);
         this.sport = response.data[0].name;
       })
       .catch((error) => {
@@ -313,7 +309,6 @@
         })
         .catch((error) => {
           // handle error
-          console.log("erroooooor");
           console.log(error);
         });
       axios.put(server.baseURLDev+'sports/addSport',{
@@ -327,7 +322,6 @@
           email: localStorage.getItem("email"),
         })
         .then((response) => {
-          console.log("add sport");
           console.log(response.data);
         })
         .catch((error) => {
@@ -340,7 +334,6 @@
         email_club: localStorage.getItem('email'),
       })
       .then((response) => {
-          console.log("add team");
           console.log(response);
         })
         .catch((error) => {
