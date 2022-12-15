@@ -26,18 +26,18 @@ export default {
     </h1>
     <div v-if="token !== null">
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
-      <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
+      <SidebarLink to="/clubs" icon="fas fa-shield">Clubs</SidebarLink>
       <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
-      <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
+      <SidebarLink to="/coachs" icon="fas fa-flag">Coachs</SidebarLink>
       <SidebarLink to="/logout" icon="fas fa-sign-in">Log out</SidebarLink>
     </div>
     <div v-else>
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
       <SidebarLink to="/role" icon="fas fa-sign-in">Register</SidebarLink>
       <SidebarLink to="/login" icon="fa-solid fa-user">Login</SidebarLink>
-      <SidebarLink to="/clubs" icon="fas fa-users">Clubs</SidebarLink>
+      <SidebarLink to="/clubs" icon="fas fa-shield">Clubs</SidebarLink>
       <SidebarLink to="/players" icon="fas fa-users">Players</SidebarLink>
-      <SidebarLink to="/coachs" icon="fas fa-users">Coachs</SidebarLink>
+      <SidebarLink to="/coachs" icon="fas fa-flag">Coachs</SidebarLink>
     </div>
 
     <span

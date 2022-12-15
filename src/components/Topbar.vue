@@ -80,12 +80,6 @@
             to="/notification"
             data-tippy-content="Notifications"
           ></v-btn>
-          <v-btn
-            id="myButton"
-            icon="fas fa-columns"
-            class="ml-3"
-            data-tippy-content="Connected as player"
-          ></v-btn>
         </div>
       </v-col>
       <v-col cols="4" class="text-right" v-if="role === 'coach'">
@@ -101,12 +95,6 @@
             class="ml-3"
             to="/notification"
             data-tippy-content="Notifications"
-          ></v-btn>
-          <v-btn
-            id="myButton"
-            icon="fas fa-home"
-            class="ml-3"
-            data-tippy-content="Connected as coach"
           ></v-btn>
         </div>
       </v-col>
