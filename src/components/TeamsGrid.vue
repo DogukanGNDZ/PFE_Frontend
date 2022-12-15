@@ -29,7 +29,9 @@
         <v-card class="playerCard" @click="redirectToProfileClub(club.id)">
           <!-- ROW -->
           <v-row>
-            <v-col cols="2">
+
+            <v-div v-if="club.picture !== ``">
+              <v-col cols="2">
               <v-avatar size="100">
                 <v-img
                   :src="
@@ -40,6 +42,21 @@
                 ></v-img>
               </v-avatar>
             </v-col>
+              </v-div>
+              <v-div v-else>
+                <v-col cols="2">
+              <v-avatar size="100">
+                <v-img
+                  src="../assets/club.png"
+                  class="rounded-circle float-left"
+                  width="30px"
+                  alt=""
+                >
+                </v-img>
+              </v-avatar>
+            </v-col>
+              </v-div>
+
             <v-col cols="9 text-left">
               <h2>{{ club.name }}</h2>
               <strong>Basketball</strong> -

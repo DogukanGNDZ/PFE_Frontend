@@ -14,7 +14,8 @@
           <!-- ROW -->
           <v-row>
             <v-col cols="12">
-              <v-img
+              <v-div v-if="coach.picture !== ``">
+                <v-img
                 :src="
                   'https://pfeimages.blob.core.windows.net/imagess/' +
                   coach.picture
@@ -24,6 +25,18 @@
                 alt=""
               >
               </v-img>
+              </v-div>
+              <v-div v-else>
+
+                <v-img
+                  src="../assets/coach.png"
+                  class="rounded-circle float-left"
+                  width="30px"
+                  alt=""
+                >
+                </v-img>
+              </v-div>
+
               <p class="float-left ml-3 namePlayer">
                 {{ coach.firstname }} {{ coach.lastname }}
               </p>
