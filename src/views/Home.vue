@@ -8,10 +8,9 @@
             <h1 class="titleSection1">The power of sport to move the world</h1>
             <div class="mt-5">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur facere inventore iusto, sed omnis officia aut
-                praesentium eaque exercitationem quos, non placeat. Sed harum ut
-                perspiciatis officia ipsa enim explicabo!
+                Find your passion and let it drive you to succeed in the world
+                of sports.Never give up on your dreams of being a top athlete,
+                and always strive for greatness on the field or court.
               </p>
             </div>
           </v-col>

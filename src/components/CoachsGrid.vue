@@ -1,5 +1,23 @@
 <template>
   <v-container>
+    <v-row class="mx-3">
+      <v-col cols="12">
+        <v-text-field
+          v-model="search"
+          class="text-field-search"
+          hide-details
+          label="Search"
+          placeholder="Search"
+          filled
+          dense
+          single-line
+        ></v-text-field>
+      </v-col>
+      <v-col cols="4">
+        <v-btn block @click="handleSearchSubmit()"> Filter </v-btn>
+      </v-col>
+    </v-row>
+
     <!-- ROW -->
     <v-row class="mx-3">
       <v-col
@@ -16,18 +34,17 @@
             <v-col cols="12">
               <v-div v-if="coach.picture !== ``">
                 <v-img
-                :src="
-                  'https://pfeimages.blob.core.windows.net/imagess/' +
-                  coach.picture
-                "
-                class="rounded-circle float-left"
-                width="30px"
-                alt=""
-              >
-              </v-img>
+                  :src="
+                    'https://pfeimages.blob.core.windows.net/imagess/' +
+                    coach.picture
+                  "
+                  class="rounded-circle float-left"
+                  width="30px"
+                  alt=""
+                >
+                </v-img>
               </v-div>
               <v-div v-else>
-
                 <v-img
                   src="../assets/coach.png"
                   class="rounded-circle float-left"
@@ -46,17 +63,14 @@
             <v-card-text class="text-left textCard">
               <p class="mb-2">
                 {{ coach.age }} years <br />
-                {{ setCount()}}
+                {{ setCount() }}
                 <v-div v-for="sportt in this.sports" :key="sportt.id">
-                  <v-div v-if="coach.id == sportt.id"> 
+                  <v-div v-if="coach.id == sportt.id">
                     {{ sportt.sport }}
-                    {{ handleCount()}}
+                    {{ handleCount() }}
                   </v-div>
-
-                </v-div>                  
-                <v-div v-if="this.count == 0">
-                    No Sport yet
                 </v-div>
+                <v-div v-if="this.count == 0"> No Sport yet </v-div>
               </p>
               <p class="my-2">
                 {{ coach.description }}
@@ -91,6 +105,7 @@ export default {
       coachs: [],
       sports: [],
       count: 0,
+      search: null,
     };
   },
   async mounted() {
@@ -101,39 +116,50 @@ export default {
       })
       .catch((error) => {
         console.log(error);
-      })
-    this.coachs.forEach(element => {
-      console.log(element.email)    
-      axios
-      .get(
-        server.baseURLDev +
-          "sports/userSport?email=" +
-          element.email
-      )
-      .then((response) => {
-        console.log("spooooort");
-        console.log(response);
-        // var sportt
-        this.sports.push({sport : response.data[0].name, id : element.id})
-      })
-      .catch((error) => {
-        console.log(error);
       });
-    })
-
-
+    this.coachs.forEach((element) => {
+      console.log(element.email);
+      axios
+        .get(server.baseURLDev + "sports/userSport?email=" + element.email)
+        .then((response) => {
+          console.log("spooooort");
+          console.log(response);
+          // var sportt
+          this.sports.push({ sport: response.data[0].name, id: element.id });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   },
   methods: {
     redirectToProfileCoach(id) {
       this.$router.push({ path: "/coachs/" + id });
     },
     handleCount() {
-      this.count +=1
+      this.count += 1;
     },
 
     setCount() {
-      this.count = 0
-    }
+      this.count = 0;
+    },
+
+    handleSearchSubmit() {
+      axios
+        .get(
+          server.baseURLDev +
+            "users/searchUser?role=coach&name=" +
+            this.search +
+            "&country="
+        )
+        .then((response) => {
+          console.log(response.data);
+          this.coachs = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
