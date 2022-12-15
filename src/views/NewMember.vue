@@ -38,7 +38,12 @@
             <v-col cols="1" class="my-3">
               <button
                 type="button"
-                @click="handleAcceptNewMember(this.newMembers[n - 1].email)"
+                @click="
+                  handleAcceptNewMember(
+                    this.newMembers[n - 1].email,
+                    this.roleUsr
+                  )
+                "
               >
                 <i
                   class="fa-regular fa-circle-check"

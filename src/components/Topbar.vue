@@ -119,6 +119,7 @@
             to="/newMember"
             data-tippy-content="Connected as club"
           ></v-btn>
+          
         </div>
       </v-col>
     </v-row>

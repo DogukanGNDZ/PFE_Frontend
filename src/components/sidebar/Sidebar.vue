@@ -20,9 +20,9 @@ export default {
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <h1 class="text-left px-2 mt-2">
       <span v-if="collapsed">
-        <div>R</div>
+        <div>S</div>
       </span>
-      <span v-else>Recruit</span>
+      <span v-else>Sport Link</span>
     </h1>
     <div v-if="token !== null">
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>

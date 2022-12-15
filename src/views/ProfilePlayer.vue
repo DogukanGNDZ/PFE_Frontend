@@ -19,16 +19,6 @@
           </v-div>
 
           <h2>{{ infoPlayer.firstname }} {{ infoPlayer.lastname }}</h2>
-          <div
-            class="my-3"
-            v-if="
-              roleUsr !== null && roleUsr !== 'player' && roleUsr !== 'coach'
-            "
-          >
-            <v-btn class="ma-2" outlined rounded color="success">
-              Demande de joueur
-            </v-btn>
-          </div>
         </v-col>
       </v-row>
       <v-row>

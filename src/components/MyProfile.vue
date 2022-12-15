@@ -225,9 +225,7 @@
       <v-btn type="submit"> Validate changes </v-btn>
     </v-form>
   </v-container>
-  
 </template>
-
 
 <script>
 import axios from "axios";
