@@ -148,6 +148,7 @@ export default {
         })
         .then((response) => {
           // handle success
+          alert("You send a demand to this team.");
           console.log(response.data);
         })
         .catch((error) => {
