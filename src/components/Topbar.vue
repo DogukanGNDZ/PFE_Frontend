@@ -136,7 +136,7 @@
           ></v-btn>
           <v-btn
             id="myButton"
-            icon="fas fa-home"
+            icon="fa-solid fa-list-check"
             class="ml-3"
             to="/newMember"
             data-tippy-content="Connected as club"

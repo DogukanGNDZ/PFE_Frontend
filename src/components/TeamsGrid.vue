@@ -59,8 +59,11 @@
 
             <v-col cols="9 text-left">
               <h2>{{ club.name }}</h2>
-              <strong>Basketball</strong> -
-              <strong>{{ club.number_teams }} teams</strong>
+              <v-div v-for="sportt in this.sports" :key="sportt.id">
+              <strong v-if="club.id == sportt.id">{{ sportt.sport }}</strong>
+              </v-div>
+              <p>
+              <strong>{{ club.number_teams }} teams</strong></p>
               <p>
                 {{ club.description }}
               </p>
@@ -82,6 +85,8 @@ export default {
     return {
       clubs: [],
       listClubs: [[]],
+      sports: [],
+      count: 0,
     };
   },
   async mounted() {
@@ -105,6 +110,25 @@ export default {
           console.log(error);
         });
     });
+    this.clubs.forEach(element => {
+      axios
+      .get(
+        server.baseURLDev +
+          "sports/userSport?email=" +
+          element.email
+      )
+      .then((response) => {
+        console.log("spooooort");
+        console.log(response);
+        // var sportt
+        this.sports.push({sport : response.data[0].name, id : element.id})
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    });
+    console.log("sports")
+    console.log(this.sports)
   },
   methods: {
     redirectToProfileClub(id) {

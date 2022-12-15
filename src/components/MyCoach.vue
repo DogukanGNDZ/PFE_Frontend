@@ -28,8 +28,8 @@
     </v-col>
     <v-list-item color="rgba(0, 0, 0, .4)">
       <v-list-item-content>
-        <v-list-item-title class="title">Jerome Devaux</v-list-item-title>
-        <v-list-item-subtitle>Football Player</v-list-item-subtitle>
+        <v-list-item-title class="title">{{ this.items[0].value }} {{ this.items[1].value }}</v-list-item-title>
+        <v-list-item-subtitle>{{ this.items[5].value }} {{ this.items[4].value }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
     <v-row>
