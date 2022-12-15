@@ -5,24 +5,25 @@
         <h1>No requests</h1>
       </v-col>
       <v-col
-        v-for="nMember in this.newMembers"
-        :key="nMember.id"
+        v-for="n in this.newMembers.length"
+        :key="n"
         cols="12"
         xs="12"
         sm="12"
         md="12"
       >
+      <!-- :key="nMember.id" -->
         <v-card class="playerCard">
           <!-- ROW -->
           <v-row>
             <v-col cols="10 text-left">
-              <h2>{{ nMember.lastname }} {{ nMember.firstname }}</h2>
-              <strong>Date {{ nMember.category }}</strong>
+              <h2>{{ this.newMembers[n-1].lastname}} {{ this.newMembers[n-1].firstname }}</h2>
+                <strong>Team: {{ this.teams[n-1].category }}</strong>
             </v-col>
             <v-col cols="1" class="my-3">
               <button
                 type="button"
-                @click="handleDeleteNewMember(nMember.email)"
+                @click="handleDeleteNewMember(this.newMembers[n-1].email)"
               >
                 <i
                   class="fa-regular fa-circle-xmark"
@@ -33,7 +34,7 @@
             <v-col cols="1" class="my-3">
               <button
                 type="button"
-                @click="handleAcceptNewMember(nMember.email)"
+                @click="handleAcceptNewMember(this.newMembers[n-1].email)"
               >
                 <i
                   class="fa-regular fa-circle-check"
@@ -56,6 +57,7 @@ export default {
   name: "NewMember",
   data: () => ({
     newMembers: [],
+    teams: [],
   }),
 
   async mounted() {
@@ -68,8 +70,15 @@ export default {
           "&role=player"
       )
       .then((response) => {
-        this.newMembers = response.data;
-        console.log(response.data);
+        let va = 0
+        response.data.forEach(element => {
+          va += 1
+          if(va %2 ==0){
+            this.teams.push(element)
+          } else {
+            this.newMembers.push(element)
+          }
+        });
       })
       .catch((error) => {
         console.log(error);
