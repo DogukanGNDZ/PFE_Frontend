@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <!-- ROW -->
     <v-row class="mx-3">
       <v-col
         v-for="coach in this.coachs"
@@ -46,17 +45,12 @@
             <v-card-text class="text-left textCard">
               <p class="mb-2">
                 {{ coach.age }} years <br />
-                {{ setCount()}}
                 <v-div v-for="sportt in this.sports" :key="sportt.id">
                   <v-div v-if="coach.id == sportt.id"> 
                     {{ sportt.sport }}
-                    {{ handleCount()}}
                   </v-div>
 
                 </v-div>                  
-                <v-div v-if="this.count == 0">
-                    No Sport yet
-                </v-div>
               </p>
               <p class="my-2">
                 {{ coach.description }}
@@ -71,7 +65,12 @@
             </v-col>
             <v-col cols="6">
               {{ coach.number_year_experience }} years <br />
-              RSCA
+              <v-div v-for="clubb in this.clubs" :key="clubb.id">
+                  <v-div v-if="coach.id == clubb.id"> 
+                    {{ clubb.club }}
+                  </v-div>
+
+              </v-div>
             </v-col>
           </v-row>
         </v-card>
@@ -91,6 +90,7 @@ export default {
       coachs: [],
       sports: [],
       count: 0,
+      clubs: [],
     };
   },
   async mounted() {
@@ -115,6 +115,22 @@ export default {
         console.log(response);
         // var sportt
         this.sports.push({sport : response.data[0].name, id : element.id})
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+      
+      axios
+      .get(
+        server.baseURLDev +
+          "coachs/coachClub?email_coach=" + element.email
+          
+      )
+      .then((response) => {
+        console.log("reeeeeeeeeeep ")
+        console.log(response)
+        this.clubs.push({club : response.data[0].name, id : element.id})
       })
       .catch((error) => {
         console.log(error);

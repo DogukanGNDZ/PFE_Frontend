@@ -1,4 +1,4 @@
 export const server = {
-  baseURLProd: "http://localhost:5000/",
-  baseURLDev: "https://backendpfe.azurewebsites.net/",
+  baseURLProd: "https://backendpfe.azurewebsites.net/",
+  baseURLDev: "http://localhost:5000/",
 };
