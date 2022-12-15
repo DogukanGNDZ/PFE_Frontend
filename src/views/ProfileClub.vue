@@ -47,6 +47,7 @@
 
             <v-card-text class="text-left">
               <p>Number of players : {{ team.number_players }}</p>
+              <p>Coach : {{ coachs.lastname }} {{ coachs.firstname }}</p>
               <p>Players :</p>
             </v-card-text>
             <v-row>
@@ -106,6 +107,7 @@ export default {
       emailClub: null,
       emailUsr: null,
       roleUsr: null,
+      coachs: [],
     };
   },
   async mounted() {
@@ -156,6 +158,17 @@ export default {
         .get(server.baseURLDev + "teams/teamsPlayer?id_team=" + value.id)
         .then((response) => {
           this.listPlayer[index] = response.data;
+          console.log(value.id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .get(server.baseURLDev + "teams/getCoach?id_team=" + value.id)
+        .then((response) => {
+          this.coachs = response.data;
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
